@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.project1">
+
+    <dist:module dist:instant="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/appicon"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activity.CourseByCategory"></activity>
+        <activity android:name=".Activity.CreateCourseActivity" />
+        <activity android:name=".Activity.ResetPassword" />
+        <activity android:name=".Activity.ForgotPassActivity" />
+        <activity android:name=".Activity.ActiveAccountActivity" />
+        <activity android:name=".Activity.UserPasswordActivity" />
+        <activity android:name=".Activity.UsserAvatarActivity" />
+        <activity android:name=".Activity.UserInfoActivity" />
+        <activity android:name=".Activity.HomeActivity" />
+        <activity android:name=".Activity.RegisActivity" />
+        <activity android:name=".Activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+    </application>
+
+</manifest>

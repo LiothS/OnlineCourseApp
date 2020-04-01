@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.UserInfoActivity"
+    android:orientation="vertical"
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#F44336"
+        android:id="@+id/userAvaTB"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        >
+
+    </androidx.appcompat.widget.Toolbar>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:fillViewport="true"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+
+            android:background="@drawable/user_info_border"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ảnh đại diện"
+                android:textSize="17dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#000"
+                android:fontFamily="sans-serif-medium"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cập nhật ảnh đại diện cho tài khoản của bạn"
+                android:textSize="13dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:background="@drawable/user_info_border"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Xem trước "
+                    android:textColor="#000"
+                    android:textSize="17dp"
+                    android:fontFamily="sans-serif"
+                    android:layout_marginTop="5dp"
+                    />
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:gravity="center"
+                   android:padding="10dp"
+                   android:layout_marginTop="15dp"
+                   android:background="@drawable/user_info_border"
+                   >
+                   <de.hdodenhof.circleimageview.CircleImageView
+                       android:layout_width="200dp"
+                       android:layout_height="200dp"
+                       app:civ_border_width="1dp"
+                       android:src="@drawable/useravatar"
+                       android:id="@+id/userAvatar"
+                       />
+               </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:layout_marginTop="-2dp"
+                android:background="@drawable/user_info_border"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chọn ảnh "
+                    android:textColor="#000"
+                    android:textSize="17dp"
+                    android:fontFamily="sans-serif"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chụp ảnh mới"
+                        android:background="@drawable/button_image_choose_border"
+                        android:padding="10dp"
+                        android:id="@+id/ChupAnhMoi"
+                        />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thư viện ảnh"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/button_image_choose_border"
+                        android:padding="10dp"
+                        android:id="@+id/ThuVienAnh"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="-2dp"
+                android:background="@drawable/user_info_border"
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cập nhật"
+                    android:background="@drawable/save_button"
+                    android:textColor="@color/white"
+                    android:padding="0dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif"
+                    android:layout_gravity="center"
+                    android:id="@+id/updateAva"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+</LinearLayout>

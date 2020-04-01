@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/feature"
+        android:title="Featured"
+        android:icon="@drawable/star"
+        />
+    <item
+        android:id="@+id/search_frag"
+        android:title="Search"
+        android:icon="@drawable/search_ic"
+        />
+    <item
+        android:id="@+id/my_course_frag"
+        android:title="Courses"
+        android:icon="@drawable/my_courses_ic"
+        />
+    <item
+        android:id="@+id/cart_frag"
+        android:title="Cart"
+        android:icon="@drawable/ic_add_shopping_cart_black_24dp"
+        />
+    <item
+        android:id="@+id/account_frag"
+        android:title="Account"
+        android:icon="@drawable/account_ic"
+        />
+
+</menu>
