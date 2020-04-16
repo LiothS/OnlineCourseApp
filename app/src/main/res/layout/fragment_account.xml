@@ -9,6 +9,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.accountFragment"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -42,11 +43,19 @@
             android:text="quangthien09012020"
             android:textSize="15dp"
             android:textColor="#000"
-            android:drawableLeft="@drawable/ic_person_pin_black_24dp"
+            android:drawableLeft="@drawable/ic_email_black_24dp"
             android:id="@+id/accountFrag_account"
             />
+
         
     </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profile"
+        android:layout_marginTop="-30dp"
+        android:layout_marginBottom="-20dp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,8 +79,8 @@
             android:textSize="18dp"
             android:textColor="#000"
             android:layout_marginTop="5dp"
-            android:drawableEnd="@drawable/ic_chevron_right_black_24dp"
-            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:drawableEnd="@drawable/ic_person1_black_24dp"
+            android:drawableRight="@drawable/ic_person1_black_24dp"
             android:id="@+id/tvThongTinCaNhan"
             />
         <TextView
@@ -82,8 +91,8 @@
             android:textSize="18dp"
             android:textColor="#000"
             android:layout_marginTop="10dp"
-            android:drawableEnd="@drawable/ic_chevron_right_black_24dp"
-            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:drawableEnd="@drawable/ic_image_black_24dp"
+            android:drawableRight="@drawable/ic_image_black_24dp"
             android:id="@+id/tvAnhDaiDien"
             />
         <TextView
@@ -94,8 +103,8 @@
             android:textSize="18dp"
             android:layout_marginTop="10dp"
             android:textColor="#000"
-            android:drawableEnd="@drawable/ic_chevron_right_black_24dp"
-            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:drawableEnd="@drawable/ic_lock_black_24dp"
+            android:drawableRight="@drawable/ic_lock_black_24dp"
             android:id="@+id/tvBaoMat"
             />
         <TextView
@@ -106,8 +115,8 @@
             android:textSize="18dp"
             android:layout_marginTop="10dp"
             android:textColor="#000"
-            android:drawableEnd="@drawable/ic_chevron_right_black_24dp"
-            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:drawableEnd="@drawable/ic_payment_black_24dp"
+            android:drawableRight="@drawable/ic_payment_black_24dp"
             android:id="@+id/tvThanhToan"
             />
 
@@ -135,8 +144,8 @@
             android:textSize="18dp"
             android:textColor="#000"
             android:layout_marginTop="5dp"
-            android:drawableEnd="@drawable/ic_chevron_right_black_24dp"
-            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:drawableEnd="@drawable/ic_info_black_24dp"
+            android:drawableRight="@drawable/ic_info_black_24dp"
             android:id="@+id/tvThongTinUngDung"
             />
         <TextView
@@ -147,8 +156,8 @@
             android:textSize="18dp"
             android:textColor="#000"
             android:layout_marginTop="10dp"
-            android:drawableEnd="@drawable/ic_chevron_right_black_24dp"
-            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:drawableEnd="@drawable/ic_local_phone_black_24dp"
+            android:drawableRight="@drawable/ic_local_phone_black_24dp"
             android:id="@+id/tvLienHe"
             />
         <TextView
@@ -159,8 +168,8 @@
             android:textSize="18dp"
             android:layout_marginTop="10dp"
             android:textColor="#000"
-            android:drawableEnd="@drawable/ic_chevron_right_black_24dp"
-            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:drawableEnd="@drawable/ic_question_answer_black_24dp"
+            android:drawableRight="@drawable/ic_question_answer_black_24dp"
             android:id="@+id/tvDatCauHoi"
             />
 

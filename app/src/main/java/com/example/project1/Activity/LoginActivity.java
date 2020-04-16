@@ -143,6 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("description",userAccount.getMota());
                                 editor.putString("address",userAccount.getDiachia());
                                 editor.putString("password",MatKhau);
+                                editor.putString("id",userAccount.getID());
                                 editor.commit();
                                 flag=true;
                             } catch (JSONException e) {

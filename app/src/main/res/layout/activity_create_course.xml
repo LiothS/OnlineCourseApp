@@ -237,6 +237,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center"
+
                     >
 
                     <Button
@@ -261,9 +262,11 @@
                 android:gravity="center"
                 android:layout_marginTop="-2dp"
                 android:background="@drawable/user_info_border"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
                 >
                 <Button
-                    android:layout_width="150dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:text="Tạo khóa học"

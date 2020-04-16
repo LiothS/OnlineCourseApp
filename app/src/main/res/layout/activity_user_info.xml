@@ -25,11 +25,7 @@
         >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-
-
-            android:background="@drawable/user_info_border"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             >
             <TextView
@@ -49,127 +45,102 @@
                 android:textSize="13dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="30dp"
                 />
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="15dp"
-                android:background="@drawable/user_info_border"
+                android:hint="Họ tên"
+                android:layout_marginBottom="20dp"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cá nhân: "
-                    android:textColor="#000"
-                    android:textSize="17dp"
-                    android:fontFamily="sans-serif"
-                    android:layout_marginTop="10dp"
-                    />
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/user_info_border"
-                    android:hint="Họ và tên"
+                    android:text="Quang Thiên"
                     android:id="@+id/userinfoName"
-                    android:textSize="17dp"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:drawablePadding="10dp"
+                    android:drawableLeft="@drawable/ic_person_outline_black_24dp"
                     />
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/user_info_border"
-                    android:hint="Giới tính"
-                    android:id="@+id/userinfoGender"
-                    android:textSize="17dp"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    />
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/user_info_border"
-                    android:hint="Mô tả"
-                    android:id="@+id/userinfoDescript"
-                    android:textSize="17dp"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    />
-
-            </LinearLayout>
-            <LinearLayout
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="15dp"
-                android:layout_marginTop="-2dp"
-                android:background="@drawable/user_info_border"
+                android:hint="Giới tính"
+                android:layout_marginBottom="20dp"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Liên lạc: "
-                    android:textColor="#000"
-                    android:textSize="17dp"
-                    android:fontFamily="sans-serif"
-                    android:layout_marginTop="10dp"
-                    />
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/user_info_border"
-                    android:hint="Số điện thoại"
-                    android:id="@+id/userinfoPhone"
-                    android:textSize="17dp"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:text="nam"
+                    android:id="@+id/userinfoGender"
+                    android:drawablePadding="10dp"
+                    android:drawableLeft="@drawable/ic_tag_faces_black_24dp"
                     />
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/user_info_border"
-                    android:hint="Địa chỉ"
-                    android:id="@+id/userinfoAddress"
-                    android:textSize="17dp"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    />
-
-
-            </LinearLayout>
-            <LinearLayout
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_marginTop="-2dp"
-                android:background="@drawable/user_info_border"
-               >
-                <Button
-                    android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Mô tả"
+                android:layout_marginBottom="20dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cập nhật"
-                    android:background="@drawable/save_button"
-                    android:textColor="@color/white"
-                    android:padding="0dp"
-                    android:id="@+id/ProfileUpdate"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="sans-serif"
-                    android:layout_gravity="center"
-
-
+                    android:text="mô tả"
+                    android:id="@+id/userinfoDescript"
+                    android:drawablePadding="10dp"
+                    android:drawableLeft="@drawable/ic_description_black_24dp"
                     />
-            </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Số điện thoại"
+                android:layout_marginBottom="10dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="012345678"
+                    android:id="@+id/userinfoPhone"
+                    android:drawablePadding="10dp"
+                    android:drawableLeft="@drawable/ic_phone_android_black_24dp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Địa chỉ"
+                android:layout_marginBottom="20dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="012345678"
+                    android:id="@+id/userinfoAddress"
+                    android:drawablePadding="10dp"
+                    android:drawableLeft="@drawable/ic_location_on_black_24dp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cập nhật"
+                android:background="@drawable/save_button"
+                android:textColor="@color/white"
+                android:padding="0dp"
+                android:id="@+id/ProfileUpdate"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif"
+                android:layout_gravity="center"
+
+
+                />
 
 
         </LinearLayout>
+
 
 
     </ScrollView>

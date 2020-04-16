@@ -6,6 +6,7 @@ import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Response;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -85,6 +86,33 @@ public interface IMyService {
     Observable<String>  getTopCourse();
     @GET
     Observable<String>  getCourseByCategory(@Url String urlGet);
+    @GET
+    Observable<String>  getCourseByIDUser(@Url String urlGet);
+    @Multipart
+    @PUT
+    Observable<String>  courseUpdate(@Url String urlPut,@Part MultipartBody.Part file,
+                                               @Part("name") String name,
+                                               @Part("goal") String goal,
+                                               @Part("description") String mota,
+                                               @Part("category") String category,
+                                               @Part("price") String price,
+                                               @Part("discount") String discount,
+
+                                            @Header("auth-token") String authToken);
+    @Multipart
+    @PUT
+    Observable<String>  courseUpdate1(@Url String urlPut,
+                                     @Part("name") String name,
+                                     @Part("goal") String goal,
+                                     @Part("description") String mota,
+                                     @Part("category") String category,
+                                     @Part("price") String price,
+                                     @Part("discount") String discount,
+
+                                     @Header("auth-token") String authToken);
+
+    @DELETE
+    Observable<String>  deleteCourse(@Url String urlGet, @Header("auth-token") String authToken);
 
 
 }

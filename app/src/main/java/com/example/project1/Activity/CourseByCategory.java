@@ -96,7 +96,9 @@ public class CourseByCategory extends AppCompatActivity {
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),
                                         Float.valueOf(jo.getString("discount")),
-                                        Float.valueOf(jo.getJSONObject("vote").getString("totalVote"))));
+                                        Float.valueOf(jo.getJSONObject("vote").getString("totalVote")),jo.getString("goal"),jo.getString("description"),jo.getString("_id"),
+                                        jo.getJSONObject("category").getString("name"),
+                                        jo.getJSONObject("category").getString("_id")));
                                 courseAdapter.notifyDataSetChanged();
 
                                 // if(i==7) Toast.makeText(getContext(), jo.getString("image"), Toast.LENGTH_LONG).show();

@@ -31,12 +31,13 @@ public class categoryRVAdapter extends RecyclerView.Adapter<categoryRVAdapter.Cu
     @NonNull
     @Override
     public categoryRVAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new CustomViewHolder(LayoutInflater.from(context).inflate(R.layout.categories_item, parent, false));
+        return new CustomViewHolder(LayoutInflater.from(context).inflate(R.layout.category_item2, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull categoryRVAdapter.CustomViewHolder holder, int position) {
-        holder.textView.setText(items.get(position).getname());
+        holder.textView.setText(items.get(position).getname().toUpperCase());
+
 
 
     }

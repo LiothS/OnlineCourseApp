@@ -236,8 +236,20 @@ public class CreateCourseActivity extends AppCompatActivity {
             valid=false;
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin khóa học", Toast.LENGTH_SHORT).show();
         }
+        if(isNumeric(price)==false||isNumeric(discount)==false)
+        {
+            valid=false;
+            Toast.makeText(this, "Vui lòng nhập giá và giảm giá của khóa học bằng số", Toast.LENGTH_SHORT).show();
+        }
         return valid;
-
+    }
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
     }
 
     private void pickImageFromGallery() {

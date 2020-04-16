@@ -1,8 +1,72 @@
 package com.example.project1.Model;
 
-public class courseItem {
-    private  String url,title,fee,author;
-    private float rating,price,discount,totalVote;
+import java.io.Serializable;
+
+public class courseItem implements Serializable {
+    private  String url;
+    private String title;
+    private String fee;
+    private String author;
+    private String authorID;
+    private String goal;
+    private String desription;
+    private String ID;
+    private String categoryName;
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getCategoryID() {
+        return CategoryID;
+    }
+
+    public void setCategoryID(String categoryID) {
+        CategoryID = categoryID;
+    }
+
+    private String CategoryID;
+    private float rating;
+    private float price;
+    private float discount;
+
+    public String getAuthorID() {
+        return authorID;
+    }
+
+    public void setAuthorID(String authorID) {
+        this.authorID = authorID;
+    }
+
+    public String getGoal() {
+        return goal;
+    }
+
+    public void setGoal(String goal) {
+        this.goal = goal;
+    }
+
+    public String getDesription() {
+        return desription;
+    }
+
+    public void setDesription(String desription) {
+        this.desription = desription;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    private float totalVote;
 
     public courseItem(String url, String title, String fee, float rating) {
         this.url = url;
@@ -10,7 +74,6 @@ public class courseItem {
         this.fee = fee;
         this.rating=rating;
     }
-
     public courseItem(String url, String title, String fee, String author, float rating, float price, float discount, float totalVote) {
         this.url = url;
         this.title = title;
@@ -20,6 +83,35 @@ public class courseItem {
         this.price = price;
         this.discount = discount;
         this.totalVote = totalVote;
+
+    }
+
+    public courseItem(String url, String title, String fee, String author, float rating, float price, float discount, float totalVote,String goal, String desription) {
+        this.url = url;
+        this.title = title;
+        this.fee = fee;
+        this.author = author;
+        this.rating = rating;
+        this.price = price;
+        this.discount = discount;
+        this.totalVote = totalVote;
+        this.goal=goal;
+        this.desription=desription;
+    }
+    public courseItem(String url, String title, String fee, String author, float rating, float price, float discount, float totalVote,String goal, String desription,String ID,String categoryName,String CategoryID) {
+        this.url = url;
+        this.title = title;
+        this.fee = fee;
+        this.author = author;
+        this.rating = rating;
+        this.price = price;
+        this.discount = discount;
+        this.totalVote = totalVote;
+        this.goal=goal;
+        this.desription=desription;
+        this.ID=ID;
+        this.categoryName=categoryName;
+        this.CategoryID=CategoryID;
     }
 
     public String getAuthor() {

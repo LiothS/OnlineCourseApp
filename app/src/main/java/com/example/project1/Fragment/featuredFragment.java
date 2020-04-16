@@ -85,7 +85,7 @@ public class featuredFragment extends Fragment {
         //load category
         adapter = new categoryRVAdapter(items,getActivity());
         recyclerView = rootView.findViewById(R.id.category_recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2, GridLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
         LoadAllCategory();
         //newcourse
@@ -241,7 +241,9 @@ boolean flag_category=false;
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),
                                         Float.valueOf(jo.getString("discount")),
-                                        Float.valueOf(jo.getJSONObject("vote").getString("totalVote"))));
+                                        Float.valueOf(jo.getJSONObject("vote").getString("totalVote")),jo.getString("goal"),jo.getString("description"),jo.getString("_id"),
+                                        jo.getJSONObject("category").getString("name"),
+                                        jo.getJSONObject("category").getString("_id")));
                                 topCourseAdapter3.notifyDataSetChanged();
 
                                 // if(i==7) Toast.makeText(getContext(), jo.getString("image"), Toast.LENGTH_LONG).show();
@@ -334,7 +336,9 @@ boolean flag_category=false;
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),
                                         Float.valueOf(jo.getString("discount")),
-                                        Float.valueOf(jo.getJSONObject("vote").getString("totalVote"))));
+                                        Float.valueOf(jo.getJSONObject("vote").getString("totalVote")),jo.getString("goal"),jo.getString("description"),jo.getString("_id"),
+                                        jo.getJSONObject("category").getString("name"),
+                                        jo.getJSONObject("category").getString("_id")));
                                 topCourseAdapter2.notifyDataSetChanged();
 
                                // if(i==7) Toast.makeText(getContext(), jo.getString("image"), Toast.LENGTH_LONG).show();
@@ -428,10 +432,12 @@ boolean flag_category=false;
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),
                                         Float.valueOf(jo.getString("discount")),
-                                        Float.valueOf(jo.getJSONObject("vote").getString("totalVote"))));
+                                        Float.valueOf(jo.getJSONObject("vote").getString("totalVote")),jo.getString("goal"),jo.getString("description"),jo.getString("_id"),
+                                        jo.getJSONObject("category").getString("name"),
+                                        jo.getJSONObject("category").getString("_id")));
                                         topCourseAdapter.notifyDataSetChanged();
 
-                                if(i==7) Toast.makeText(getContext(), jo.getString("image"), Toast.LENGTH_LONG).show();
+                               // if(i==7) Toast.makeText(getContext(), jo.getString("image"), Toast.LENGTH_LONG).show();
 
 
                             }

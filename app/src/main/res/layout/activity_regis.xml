@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/backgroundlogin"
+        android:background="@drawable/uitlogo"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,13 +45,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:hint="Họ tên"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textColorHint="#ffff"
                 android:theme="@style/EditTextStyle"
                 android:id="@+id/htLayout"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -60,7 +61,7 @@
                     android:drawableEnd="@drawable/name"
                     android:id="@+id/HoTennText"
                     android:drawableRight="@drawable/name"
-                    android:hint="Họ tên"
+
                     android:padding="10dp"
 
                     />
@@ -75,6 +76,8 @@
                 android:textColorHint="#ffff"
                 android:theme="@style/EditTextStyle"
                 android:id="@+id/nsLayout"
+                android:hint="Ngày sinh"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -83,7 +86,7 @@
                     android:textColorHint="@color/white"
                     android:textColor="@color/white"
                     android:drawableRight="@drawable/birth"
-                    android:hint="Ngày sinh"
+
                     android:id="@+id/NgaySinhText"
                     android:padding="10dp"
                     android:clickable="true"
@@ -98,8 +101,10 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textColorHint="#ffff"
+                android:hint="Số điện thoại"
                 android:theme="@style/EditTextStyle"
                 android:id="@+id/sdtLayout"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -108,7 +113,7 @@
                     android:drawableEnd="@drawable/ic_local_phone_black_24dp"
                     android:id="@+id/sdtText"
                     android:drawableRight="@drawable/ic_local_phone_black_24dp"
-                    android:hint="Số điện thoại"
+
                     android:padding="10dp"
 
 
@@ -123,7 +128,9 @@
                 android:layout_marginRight="20dp"
                 android:textColorHint="#ffff"
                 android:theme="@style/EditTextStyle"
+                android:hint="Mô tả"
                 android:id="@+id/motalayout"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -132,7 +139,7 @@
                     android:drawableEnd="@drawable/descript"
                     android:id="@+id/motaText"
                     android:drawableRight="@drawable/ic_local_phone_black_24dp"
-                    android:hint="Mô tả"
+
                     android:padding="10dp"
 
 
@@ -147,7 +154,9 @@
                 android:layout_marginRight="20dp"
                 android:textColorHint="#ffff"
                 android:theme="@style/EditTextStyle"
+                android:hint="Giới tính"
                 android:id="@+id/gioitinhlayout"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -156,7 +165,7 @@
                     android:drawableEnd="@drawable/gender"
                     android:id="@+id/gioitinhText"
                     android:drawableRight="@drawable/ic_local_phone_black_24dp"
-                    android:hint="Giới tính"
+
                     android:padding="10dp"
 
 
@@ -170,8 +179,10 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textColorHint="#ffff"
+                android:hint="Địa chỉ"
                 android:theme="@style/EditTextStyle"
                 android:id="@+id/diachiLayout"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -180,7 +191,7 @@
                     android:drawableEnd="@drawable/address"
                     android:id="@+id/diachiText"
                     android:drawableRight="@drawable/ic_local_phone_black_24dp"
-                    android:hint="Địa chỉ"
+
                     android:padding="10dp"
 
 
@@ -196,6 +207,8 @@
                 android:textColorHint="#ffff"
                 android:theme="@style/EditTextStyle"
                 android:id="@+id/taikhoanLayout"
+                android:hint="Email của bạn"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -204,7 +217,7 @@
                     android:drawableEnd="@drawable/ic_account_circle_black_24dp"
                     android:id="@+id/taikhoanText"
                     android:drawableRight="@drawable/ic_account_circle_black_24dp"
-                    android:hint="Email của bạn"
+
                     android:padding="10dp"
 
                     />
@@ -219,6 +232,8 @@
                 android:textColorHint="#ffff"
                 android:theme="@style/EditTextStyle"
                 android:id="@+id/matkhauLayout"
+                android:hint="Mật khẩu"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -227,7 +242,7 @@
                     android:textColorHint="@color/white"
                     android:textColor="@color/white"
                     android:drawableRight="@drawable/ic_lock_24dp"
-                    android:hint="Mật khẩu"
+
                     android:inputType="textPassword"
                     android:padding="10dp"
                     android:id="@+id/matkahuText"
@@ -244,6 +259,8 @@
                 android:textColorHint="#ffff"
                 android:theme="@style/EditTextStyle"
                 android:id="@+id/xacnhanLayout"
+                android:hint="Xác nhận mật khẩu"
+                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -252,7 +269,7 @@
                     android:textColorHint="@color/white"
                     android:textColor="@color/white"
                     android:drawableRight="@drawable/ic_lock_24dp"
-                    android:hint="Xác nhận mật khẩu"
+
                     android:inputType="textPassword"
                     android:padding="10dp"
                     android:id="@+id/xacnhanText"

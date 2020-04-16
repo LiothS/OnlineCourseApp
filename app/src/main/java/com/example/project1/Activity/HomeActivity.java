@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.project1.Fragment.accountFragment;
+import com.example.project1.Fragment.createdCourseFragment;
 import com.example.project1.Fragment.featuredFragment;
 import com.example.project1.Fragment.mycoursesFragment;
 import com.example.project1.Fragment.searchFragment;
@@ -40,11 +41,13 @@ import com.example.project1.R;
 import com.example.project1.Retrofit.IMyService;
 import com.example.project1.Retrofit.RetrofitClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.resources.TextAppearance;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,18 +104,24 @@ public class HomeActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String text = parent.getItemAtPosition(position).toString();
-                Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
-                ((TextView) parent.getChildAt(0)).setText("");
-               if(text.equals("Create new course"))
-               {
-                   categoriesID.clear();
-                   categoriesName.clear();
-                  getAllCategory();
+               // Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+                //((TextView) parent.getChildAt(0)).setText("");
+                ((TextView) parent.getChildAt(0)).setTextAppearance(android.R.style.TextAppearance_Material_Widget_Toolbar_Title);
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parent.getChildAt(0)).setTextSize(21);
 
-              }
+
+
+
+
+               if(text.equals("Khóa học đã tạo"))
+               {
+                   getSupportFragmentManager().beginTransaction().replace(R.id.container,new createdCourseFragment()).commit();
+               }
 
 
 
@@ -149,11 +158,16 @@ public class HomeActivity extends AppCompatActivity {
                case R.id.my_course_frag:
                    homeTB.setVisibility(View.VISIBLE);
                    fragment=new mycoursesFragment();
-                   homeTB.setTitle("Courses");
+                   homeTB.setTitle(null);
+                  // homeTB.setTitle("Courses");
+                   ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(HomeActivity.this,
+                           R.array.numbers, android.R.layout.simple_spinner_item);
+                   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                   spinner.setAdapter(adapter);
 
-                   spinner.setVisibility(View.VISIBLE);
                    searchView.setVisibility(GONE);
                    homeTB.setTitleTextColor(-1);
+                   spinner.setVisibility(View.VISIBLE);
                    break;
                case R.id.cart_frag:
                    homeTB.setVisibility(View.VISIBLE);
@@ -269,7 +283,7 @@ public class HomeActivity extends AppCompatActivity {
 
                         if(flag==true)
                         {
-                            Toast.makeText(HomeActivity.this, "size: "+categoriesID.size(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(HomeActivity.this, "size: "+categoriesID.size(), Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(HomeActivity.this,CreateCourseActivity.class);
                             intent.putStringArrayListExtra("list1",categoriesName);
                             intent.putStringArrayListExtra("list2",categoriesID);
