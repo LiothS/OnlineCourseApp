@@ -220,7 +220,9 @@ boolean flag=false;
                                         Float.valueOf(jo.getString("discount")),
                                         Float.valueOf(jo.getJSONObject("vote").getString("totalVote")),jo.getString("goal"),jo.getString("description"),jo.getString("_id"),
                                         jo.getJSONObject("category").getString("name"),
-                                        jo.getJSONObject("category").getString("_id")));
+                                        jo.getJSONObject("category").getString("_id"),
+                                        jo.getString("ranking"),
+                                        jo.getString("created_at")));
                                 courseAdapter.notifyDataSetChanged();
 
                                 // if(i==7) Toast.makeText(getContext(), jo.getString("image"), Toast.LENGTH_LONG).show();

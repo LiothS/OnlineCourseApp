@@ -18,6 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activity.LessonManageActivity"></activity>
+        <activity android:name=".Activity.CourseDetail"></activity>
         <activity android:name=".Activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,9 +38,7 @@
         <activity android:name=".Activity.UserInfoActivity" />
         <activity android:name=".Activity.HomeActivity" />
         <activity android:name=".Activity.RegisActivity" />
-        <activity android:name=".Activity.LoginActivity">
-
-        </activity>
+        <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".MainActivity" />
 
         <meta-data

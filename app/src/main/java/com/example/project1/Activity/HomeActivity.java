@@ -21,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -78,6 +80,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_home);
         AnhXa();
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
@@ -120,6 +123,7 @@ public class HomeActivity extends AppCompatActivity {
 
                if(text.equals("Khóa học đã tạo"))
                {
+                   homeTB.setTitle("Khóa học đã tạo");
                    getSupportFragmentManager().beginTransaction().replace(R.id.container,new createdCourseFragment()).commit();
                }
 
@@ -151,15 +155,15 @@ public class HomeActivity extends AppCompatActivity {
                    homeTB.setVisibility(View.VISIBLE);
                    fragment=new searchFragment();
                     searchView.setVisibility(View.VISIBLE);
-
+                    spinner.setVisibility(GONE);
                    homeTB.setTitle("");
                    homeTB.setTitleTextColor(-1);
                    break;
                case R.id.my_course_frag:
                    homeTB.setVisibility(View.VISIBLE);
                    fragment=new mycoursesFragment();
-                   homeTB.setTitle(null);
-                  // homeTB.setTitle("Courses");
+
+                   homeTB.setTitle("Courses");
                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(HomeActivity.this,
                            R.array.numbers, android.R.layout.simple_spinner_item);
                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -33,6 +33,8 @@ public class courseItem implements Serializable {
     private float rating;
     private float price;
     private float discount;
+    private String ranking;
+    private String updateTime;
 
     public String getAuthorID() {
         return authorID;
@@ -60,6 +62,22 @@ public class courseItem implements Serializable {
 
     public String getID() {
         return ID;
+    }
+
+    public String getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(String ranking) {
+        this.ranking = ranking;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 
     public void setID(String ID) {
@@ -98,7 +116,8 @@ public class courseItem implements Serializable {
         this.goal=goal;
         this.desription=desription;
     }
-    public courseItem(String url, String title, String fee, String author, float rating, float price, float discount, float totalVote,String goal, String desription,String ID,String categoryName,String CategoryID) {
+    public courseItem(String url, String title, String fee, String author, float rating, float price, float discount, float totalVote,String goal, String desription,String ID,String categoryName,String CategoryID
+    ,String rank, String updateTime) {
         this.url = url;
         this.title = title;
         this.fee = fee;
@@ -112,6 +131,8 @@ public class courseItem implements Serializable {
         this.ID=ID;
         this.categoryName=categoryName;
         this.CategoryID=CategoryID;
+        this.ranking=rank;
+        this.updateTime=updateTime;
     }
 
     public String getAuthor() {

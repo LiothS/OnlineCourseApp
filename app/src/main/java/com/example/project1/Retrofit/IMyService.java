@@ -113,6 +113,17 @@ public interface IMyService {
 
     @DELETE
     Observable<String>  deleteCourse(@Url String urlGet, @Header("auth-token") String authToken);
+    @POST("join/create-join")
+    @FormUrlEncoded
+    Observable<Response<String>>  joinCourse( @Field("idUser") String name,
+                                    @Field("idCourse") String goal
+
+
+    );
+    @GET
+    Observable<String>  getJoinedCourse(@Url String urlGet);
+
+
 
 
 }

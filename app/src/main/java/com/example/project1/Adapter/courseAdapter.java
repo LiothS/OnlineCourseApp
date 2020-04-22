@@ -1,6 +1,7 @@
 package com.example.project1.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project1.Activity.CourseDetail;
 import com.example.project1.Model.courseItem;
 import com.example.project1.R;
 import com.squareup.picasso.MemoryPolicy;
@@ -91,7 +93,14 @@ public class courseAdapter extends RecyclerView.Adapter<courseAdapter.CustomView
             imageView=view.findViewById(R.id.courseImage1);
             ratingBar=view.findViewById(R.id.course_rating);
             discount=view.findViewById(R.id.discount);
-
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context, CourseDetail.class);
+                    intent.putExtra("course",items.get(getAdapterPosition()));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
