@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="#fff"
+
+        >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:src="@drawable/choiceicon"
+            android:layout_marginRight="10dp"
+            android:id="@+id/choiceImageIcon"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:layout_width="263dp"
+            android:layout_height="wrap_content"
+            android:text="dasdsadsdsaddasdasd.pdf"
+            android:textSize="20dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="#000"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:background="#fff"
+            android:id="@+id/questionName"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+
+            />
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:id="@+id/deleteQuestion"
+            android:background="@drawable/detail_border_btn"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/deleteicon"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
