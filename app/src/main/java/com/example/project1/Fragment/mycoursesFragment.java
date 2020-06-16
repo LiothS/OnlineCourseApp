@@ -17,9 +17,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project1.Activity.CourseByCategory;
+import com.example.project1.Adapter.JoinedCourseAdapter;
 import com.example.project1.Adapter.MyCreatedCourse;
 import com.example.project1.Adapter.courseAdapter;
 import com.example.project1.Model.courseItem;
@@ -46,9 +48,10 @@ public class mycoursesFragment extends Fragment {
 
 
     ArrayList<courseItem> courseItems = new ArrayList<>();
-    com.example.project1.Adapter.courseAdapter courseAdapter;
+    com.example.project1.Adapter.JoinedCourseAdapter courseAdapter;
     RecyclerView recyclerView;
     SharedPreferences sharedPreferences;
+    TextView tv;
     public mycoursesFragment() {
         // Required empty public constructor
     }
@@ -65,7 +68,8 @@ public class mycoursesFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootview =inflater.inflate(R.layout.fragment_mycourses, container, false);
         recyclerView=rootview.findViewById(R.id.my_joined_course);
-        courseAdapter=new courseAdapter(courseItems,getActivity());
+       // tv=rootview.findViewById(R.id.sss);
+        courseAdapter=new JoinedCourseAdapter(courseItems,getActivity());
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         courseAdapter.setHasStableIds(true);
 
@@ -76,6 +80,7 @@ public class mycoursesFragment extends Fragment {
         return  rootview;
     }
  boolean flag=false;
+    String temp="";
     private void getJoinedCoure() {
         IMyService iMyService;
         AlertDialog alertDialog;
@@ -83,7 +88,7 @@ public class mycoursesFragment extends Fragment {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(getContext()).build();
         alertDialog.show();
-        iMyService.getJoinedCourse("https://udemy-online-courses.herokuapp.com/join/get-courses-joined-by-user/"+sharedPreferences.getString("id","")).
+        iMyService.getJoinedCourse("http://52.152.163.79:9000/join/get-courses-joined-by-user/"+sharedPreferences.getString("id","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -96,40 +101,9 @@ public class mycoursesFragment extends Fragment {
                     @Override
                     public void onNext(String response) {
 
+                        flag=true;
+                        temp=response;
 
-
-                        try {
-
-                            String temp=response;
-
-                            //JSONObject jsonObject=new JSONObject(temp);
-
-                            JSONArray ja=new JSONArray(response);
-                            // JSONArray jsonArray=jsonObject.getJSONArray("");
-                            for(int i=0;i<ja.length();i++)
-                            {
-                                JSONObject jo=ja.getJSONObject(i);
-                                courseItems.add(new courseItem( "https://udemy-online-courses.herokuapp.com/upload/course_image/"+jo.getString("image"),
-                                        jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
-                                        Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
-                                        Float.valueOf(jo.getString("price")),
-                                        Float.valueOf(jo.getString("discount")),
-                                        Float.valueOf(jo.getJSONObject("vote").getString("totalVote")),jo.getString("goal"),jo.getString("description"),jo.getString("_id"),
-                                        jo.getJSONObject("category").getString("name"),
-                                        jo.getJSONObject("category").getString("_id"),
-                                        jo.getString("ranking"),
-                                        jo.getString("created_at")));
-                                courseAdapter.notifyDataSetChanged();
-
-                                // if(i==7) Toast.makeText(getContext(), jo.getString("image"), Toast.LENGTH_LONG).show();
-
-
-                            }
-                            flag=true;
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
-                        }
 
 
 
@@ -162,7 +136,34 @@ public class mycoursesFragment extends Fragment {
 
                         if(flag==true)
                         {
+                            //Toast.makeText(getContext(), "Cssss", Toast.LENGTH_SHORT).show();
+                            try {
 
+
+                                //JSONObject jsonObject=new JSONObject(temp);
+
+                                JSONArray ja=new JSONArray(temp);
+                                // JSONArray jsonArray=jsonObject.getJSONArray("");
+                                for(int i=0;i<ja.length();i++)
+                                {
+                                    JSONObject jo=ja.getJSONObject(i);
+                                    JSONObject jo2=jo.getJSONObject("idCourse");
+                                    courseItem ci=new courseItem();
+                                    ci.setID(jo2.getString("_id"));
+                                    ci.setTitle(jo2.getString("name"));
+                                    ci.setUrl("http://52.152.163.79:9000/upload/course_image/"+jo2.getString("image"));
+                                    courseItems.add(ci);
+                                    courseAdapter.notifyDataSetChanged();
+
+                                    // if(i==7) Toast.makeText(getContext(), jo.getString("image"), Toast.LENGTH_LONG).show();
+
+
+                                }
+                                flag=true;
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                            }
 
                         }
                         else
@@ -170,6 +171,7 @@ public class mycoursesFragment extends Fragment {
 
                     }
                 });
+        //tv.setText(temp);
     }
 
 

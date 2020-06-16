@@ -52,7 +52,7 @@ public class accountFragment extends Fragment {
 
     private CircleImageView circleImageView;
     TextView Name,Email;
-    String URLDefault="https://udemy-online-courses.herokuapp.com/upload/user_image/";
+    String URLDefault="http://52.152.163.79:9000/upload/user_image/";
     UserAccount userAccount;
 
     public accountFragment() {
@@ -219,7 +219,7 @@ public class accountFragment extends Fragment {
                             editor.remove("description");
                             editor.remove("address");
                             editor.remove("token");
-
+                            editor.remove(("cartArray"));
                             editor.commit();
                             Intent intent =new Intent(getContext(),LoginActivity.class);
                             startActivity(intent);

@@ -26,6 +26,7 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,6 +58,8 @@ public class CourseDetail extends AppCompatActivity {
     AlertDialog alertDialog;
     boolean flag=false;
     SharedPreferences sharedPreferences;
+    JSONArray cartArray=new JSONArray();
+    boolean checkCart=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,16 +71,50 @@ public class CourseDetail extends AppCompatActivity {
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         Retrofit retrofitClient= RetrofitClient.getInstance();
         iMyService=retrofitClient.create(IMyService.class);
+        if(courseItem.getPrice()!=0) courseJoinBtn.setVisibility(GONE);
         courseJoinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 joinCourse();
             }
         });
+
+        try {
+            cartArray= new JSONArray(sharedPreferences.getString("cartArray", "[]"));
+            for (int i = 0; i < cartArray.length(); i++) {
+                Toast.makeText(this, "index: "+i, Toast.LENGTH_SHORT).show();
+                checkCart=true;
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JSONObject jo=new JSONObject();
+                try {
+                    jo.put("courseImage",courseItem.getUrl());
+                    jo.put("author",courseItem.getAuthor());
+                    jo.put("courseID",courseItem.getID());
+                    jo.put("title",courseItem.getTitle());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                cartArray.put(jo);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("cartArray",cartArray.toString());
+                editor.apply();
+                Toast.makeText(CourseDetail.this, "Thành công", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        courseDescription.setText(cartArray.toString());
     }
 
     private void setUp() {
-        Picasso.get().load(courseItem.getUrl()).placeholder(R.drawable.empty).error(R.drawable.empty).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(courseImage);
+        Picasso.get().load(courseItem.getUrl()).placeholder(R.drawable.image1).error(R.drawable.image1).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(courseImage);
         courseName.setText(courseItem.getTitle());
         courseGoal.setText(courseItem.getGoal());
         courseRank.setText("Xếp hạng "+courseItem.getRanking());

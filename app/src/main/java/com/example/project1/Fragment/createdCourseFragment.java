@@ -187,7 +187,7 @@ boolean flag=false;
         alertDialog.show();
         SharedPreferences sharedPreferences;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        iMyService.getCourseByIDUser("https://udemy-online-courses.herokuapp.com/course/getby-iduser/"+sharedPreferences.getString("id","")).
+        iMyService.getCourseByIDUser("http://52.152.163.79:9000/course/getby-iduser/"+sharedPreferences.getString("id","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -213,7 +213,7 @@ boolean flag=false;
                             for(int i=0;i<ja.length();i++)
                             {
                                 JSONObject jo=ja.getJSONObject(i);
-                                courseItems.add(new courseItem( "https://udemy-online-courses.herokuapp.com/upload/course_image/"+jo.getString("image"),
+                                courseItems.add(new courseItem( "http://52.152.163.79:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),

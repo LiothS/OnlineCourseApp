@@ -59,122 +59,111 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
         android:orientation="vertical"
         android:layout_marginRight="15dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thông tin tài khoản"
-            android:textSize="13dp"
-            android:fontFamily="sans-serif"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Thông tin cá nhân"
-            android:fontFamily="sans-serif"
-            android:textSize="18dp"
-            android:textColor="#000"
-            android:layout_marginTop="5dp"
-            android:drawableEnd="@drawable/ic_person1_black_24dp"
-            android:drawableRight="@drawable/ic_person1_black_24dp"
-            android:id="@+id/tvThongTinCaNhan"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ảnh đại diên"
-            android:fontFamily="sans-serif"
-            android:textSize="18dp"
-            android:textColor="#000"
-            android:layout_marginTop="10dp"
-            android:drawableEnd="@drawable/ic_image_black_24dp"
-            android:drawableRight="@drawable/ic_image_black_24dp"
-            android:id="@+id/tvAnhDaiDien"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bảo mật và đăng nhập"
-            android:fontFamily="sans-serif"
-            android:textSize="18dp"
-            android:layout_marginTop="10dp"
-            android:textColor="#000"
-            android:drawableEnd="@drawable/ic_lock_black_24dp"
-            android:drawableRight="@drawable/ic_lock_black_24dp"
-            android:id="@+id/tvBaoMat"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Phương thức thanh toán"
-            android:fontFamily="sans-serif"
-            android:textSize="18dp"
-            android:layout_marginTop="10dp"
-            android:textColor="#000"
-            android:drawableEnd="@drawable/ic_payment_black_24dp"
-            android:drawableRight="@drawable/ic_payment_black_24dp"
-            android:id="@+id/tvThanhToan"
-            />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="15dp"
-        android:orientation="vertical"
-        android:layout_marginRight="15dp"
         >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hỗ trợ"
-            android:textSize="13dp"
-            android:fontFamily="sans-serif"
-            />
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thông tin ứng dụng"
-            android:fontFamily="sans-serif"
-            android:textSize="18dp"
-            android:textColor="#000"
-            android:layout_marginTop="5dp"
-            android:drawableEnd="@drawable/ic_info_black_24dp"
-            android:drawableRight="@drawable/ic_info_black_24dp"
-            android:id="@+id/tvThongTinUngDung"
-            />
-        <TextView
+            android:orientation="horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/profile_person_icon"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Thông tin cá nhân"
+                android:layout_gravity="center"
+                android:textColor="#000"
+                android:id="@+id/tvThongTinCaNhan"
+                android:layout_marginLeft="20dp"
+                />
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Liên hệ"
-            android:fontFamily="sans-serif"
-            android:textSize="18dp"
-            android:textColor="#000"
-            android:layout_marginTop="10dp"
-            android:drawableEnd="@drawable/ic_local_phone_black_24dp"
-            android:drawableRight="@drawable/ic_local_phone_black_24dp"
-            android:id="@+id/tvLienHe"
-            />
-        <TextView
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/profile_avatar_icon"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Ảnh đại diện"
+                android:layout_gravity="center"
+                android:textColor="#000"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/tvAnhDaiDien"
+                />
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Đặt câu hỏi"
-            android:fontFamily="sans-serif"
-            android:textSize="18dp"
-            android:layout_marginTop="10dp"
-            android:textColor="#000"
-            android:drawableEnd="@drawable/ic_question_answer_black_24dp"
-            android:drawableRight="@drawable/ic_question_answer_black_24dp"
-            android:id="@+id/tvDatCauHoi"
-            />
+            android:orientation="horizontal"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/profile_security"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Bảo mật"
+                android:layout_gravity="center"
+                android:textColor="#000"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/tvBaoMat"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_payment_black_24dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Phương thức thanh toán"
+                android:layout_gravity="center"
+                android:textColor="#000"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/tvThanhToan"
+                />
+
+        </LinearLayout>
 
 
     </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

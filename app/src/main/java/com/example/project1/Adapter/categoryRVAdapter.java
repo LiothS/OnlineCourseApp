@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,9 @@ import com.example.project1.Activity.CreateCourseActivity;
 import com.example.project1.Activity.UserInfoActivity;
 import com.example.project1.Model.category_item;
 import com.example.project1.R;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -37,7 +41,7 @@ public class categoryRVAdapter extends RecyclerView.Adapter<categoryRVAdapter.Cu
     @Override
     public void onBindViewHolder(@NonNull categoryRVAdapter.CustomViewHolder holder, int position) {
         holder.textView.setText(items.get(position).getname().toUpperCase());
-
+        Picasso.get().load(items.get(position).getImg()).placeholder(R.drawable.empty2).error(R.drawable.empty2).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.img);
 
 
     }
@@ -51,8 +55,10 @@ public class categoryRVAdapter extends RecyclerView.Adapter<categoryRVAdapter.Cu
 public class CustomViewHolder extends RecyclerView.ViewHolder {
 
     private TextView textView;
+    ImageView img;
     public CustomViewHolder(View view) {
         super(view);
+   img=view.findViewById(R.id.category_image);
         textView=view.findViewById(R.id.category_tv);
         view.setOnClickListener(new View.OnClickListener() {
             @Override

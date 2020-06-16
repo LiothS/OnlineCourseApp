@@ -73,6 +73,7 @@ public class CreateCourseActivity extends AppCompatActivity {
     ArrayList<String> categoryID;
     SharedPreferences sharedPreferences;
     UserAccount userAccount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

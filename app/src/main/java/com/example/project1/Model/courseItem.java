@@ -9,6 +9,17 @@ public class courseItem implements Serializable {
     private String author;
     private String authorID;
     private String goal;
+
+    public courseItem() {
+    }
+
+    public courseItem(String url, String title, String author, String ID) {
+        this.url = url;
+        this.title = title;
+        this.author = author;
+        this.ID = ID;
+    }
+
     private String desription;
     private String ID;
     private String categoryName;

@@ -149,7 +149,8 @@ boolean flag_category=false;
                                 JSONObject jo=ja.getJSONObject(i);
                                 String tempName=jo.getString("name");
                                 String tempID=jo.getString("_id");
-                              items.add(new category_item(tempName,tempID));
+                                String img=jo.getString("image");
+                              items.add(new category_item(tempName,tempID,"http://52.152.163.79:9000/upload/category/"+img));
                               adapter.notifyDataSetChanged();
 
                                 flag_category=true;
@@ -236,7 +237,8 @@ boolean flag_category=false;
                             for(int i=0;i<ja.length();i++)
                             {
                                 JSONObject jo=ja.getJSONObject(i);
-                                courseItems3.add(new courseItem( "https://udemy-online-courses.herokuapp.com/upload/course_image/"+jo.getString("image"),
+
+                                courseItems3.add(new courseItem( "http://52.152.163.79:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),
@@ -333,7 +335,7 @@ boolean flag_category=false;
                             for(int i=0;i<ja.length();i++)
                             {
                                 JSONObject jo=ja.getJSONObject(i);
-                                courseItems2.add(new courseItem( "https://udemy-online-courses.herokuapp.com/upload/course_image/"+jo.getString("image"),
+                                courseItems2.add(new courseItem( "http://52.152.163.79:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),
@@ -431,7 +433,7 @@ boolean flag_category=false;
                             for(int i=0;i<ja.length();i++)
                             {
                                 JSONObject jo=ja.getJSONObject(i);
-                                courseItems.add(new courseItem( "https://udemy-online-courses.herokuapp.com/upload/course_image/"+jo.getString("image"),
+                                courseItems.add(new courseItem( "http://52.152.163.79:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),

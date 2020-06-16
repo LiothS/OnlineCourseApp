@@ -37,6 +37,7 @@ import com.example.project1.Retrofit.IMyService;
 import com.example.project1.Retrofit.RetrofitClient;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -66,18 +67,19 @@ public class RegisActivity extends AppCompatActivity {
     String myDateOfBirth;
     String[] temp;
     String name = "";
+    String failText="";
     String username = "";
     String mobile = "";
     String password = "";
     String DateOfBirth ="";
-    public static final String URL = "http://192.168.28.2:9000/register";
+    public static final String URL = "http://52.152.163.79:9000/register";
     String reEnterPassword = "";
     String DiaChi="",MoTa="",GioiTinh="",token="";
     UserAccount userAccount;
     private DatePickerDialog.OnDateSetListener birthdayListener;
     CompositeDisposable compositeDisposable =new CompositeDisposable();
     IMyService iMyService;
-    Boolean flag=true;
+    Boolean flag=false;
     AlertDialog alertDialog;
     @Override
     protected void onStop() {
@@ -157,6 +159,7 @@ public class RegisActivity extends AppCompatActivity {
            @Override
            public void onNext(Response<String> response) {
 
+
                if(response.isSuccessful()){
 
                    if(response.body().toString().contains("name"))
@@ -177,8 +180,30 @@ public class RegisActivity extends AppCompatActivity {
                        flag=false;
                    }
                }
-               else {Toast.makeText(RegisActivity.this, "Mail đã tồn tại", Toast.LENGTH_SHORT).show();
-                   flag=false;}
+               else {
+                   failText="cc";
+                   String responeString= null;
+                   try {
+                       responeString = response.errorBody().string();
+                   } catch (IOException e) {
+                       e.printStackTrace();
+                   }
+
+
+                   try {
+                       JSONObject parent=new JSONObject(responeString);
+                      JSONArray jo=parent.getJSONArray("errors");
+                    for(int i=0;i<jo.length();i++)
+                    {
+                        JSONObject jsonObject=jo.getJSONObject(i);
+                        failText=jsonObject.getString("msg");
+                    }
+                       flag=false;
+                   } catch (JSONException e) {
+                       e.printStackTrace();
+                       failText=e.toString();
+                   }
+               }
 
 
 
@@ -217,7 +242,7 @@ public class RegisActivity extends AppCompatActivity {
                     CustomIntent.customType(RegisActivity.this, "right-to-left");
                 }
                 else {
-                    Toast.makeText(RegisActivity.this, "Mail đã tồn tai", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisActivity.this, failText, Toast.LENGTH_SHORT).show();
                     RegButton.setClickable(true);
                     RegButton.setEnabled(true);
                 }

@@ -1,11 +1,18 @@
 package com.example.project1.Retrofit;
 
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Response;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -122,6 +129,54 @@ public interface IMyService {
     );
     @GET
     Observable<String>  getJoinedCourse(@Url String urlGet);
+    @Multipart
+    @POST("lesson/create-lesson")
+    Observable<String> createLesson(
+            @Part("title") String name,
+            @Part("order") String order,
+            @Part("multipleChoices") String quiz,
+            @Part("idCourse") String id,
+            @Part  MultipartBody.Part video,
+            @Part List<MultipartBody.Part> files,
+            @Header("auth-token") String authToken);
+    @GET
+    Observable<String>  getLesson(@Url String urlGet);
+    @PUT
+    @FormUrlEncoded
+    Observable<String>  updateLessonInfo(@Url String urlGet,
+                                         @Field("idCourse") String idcourse,
+                                         @Field("order") String order,
+                                         @Field("title") String title,
+                                         @Header("auth-token") String authToken);
+    @DELETE
+    Observable<String>  deleteFile(@Url String urlGet, @Header("auth-token") String authToken);
+
+    @Multipart
+    @PUT
+    Observable<String>  addLessonFile(@Url String urlGet,@Part MultipartBody.Part file,
+
+                                            @Header("auth-token") String authToken);
+    @PUT
+    Observable<String> updateMultipleChoice (@Url String urlGet,
+                                             @Body RequestBody body,
+
+                                             @Header("auth-token") String authToken);
+    @POST("lesson/upload-image-multiple-choice")
+    @Multipart
+    Observable<String>  popUpImage(@Part MultipartBody.Part file,
+                                   @Header("auth-token") String authToken);
+    @POST("/comment/add-comment")
+    @Multipart
+    Observable<String>  addComment(
+                                   @Part  MultipartBody.Part image,
+                                   @Part("idParent") String idParent,
+                                   @Part("idCourse") String idCourse,
+                                   @Part("content") String content,
+                                   @Part("idUser") String idUser,
+                                   @Part("idLesson") String idLesson
+                                  );
+    @GET
+    Observable<String>  getListComment(@Url String urlGet);
 
 
 

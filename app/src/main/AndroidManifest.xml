@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.intent.action.MULTIPLE_PICK" />
 
     <application
         android:allowBackup="true"
@@ -17,9 +18,21 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Activity.LessonManageActivity"></activity>
-        <activity android:name=".Activity.CourseDetail"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activity.CommentDetailActivity">
+
+        </activity>
+        <activity android:name=".Activity.LessonDetailActivity" />
+        <activity android:name=".Activity.JoinedCourseLessons" />
+        <activity android:name=".Activity.CreateAMultiChoice" />
+        <activity android:name=".Activity.LessonChoicesActivity" />
+        <activity android:name=".Activity.LessonVideoActivity" />
+        <activity android:name=".Activity.LessonFileActivity" />
+        <activity android:name=".Activity.OwnLessonActivity" />
+        <activity android:name=".Activity.CreateLesson" />
+        <activity android:name=".Activity.LessonManageActivity" />
+        <activity android:name=".Activity.CourseDetail" />
         <activity android:name=".Activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

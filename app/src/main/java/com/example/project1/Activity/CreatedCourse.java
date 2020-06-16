@@ -74,6 +74,7 @@ public class CreatedCourse extends AppCompatActivity {
     String sendCategoryName;
 
     SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,7 +144,7 @@ public class CreatedCourse extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog1= new AlertDialog.Builder(CreatedCourse.this)
-                        .setTitle("Đăng xuất")
+                        .setTitle("Xóa khóa học")
                         .setMessage("Bạn có chắc muốn xóa khóa học này không ?")
                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             @Override
@@ -160,11 +161,20 @@ public class CreatedCourse extends AppCompatActivity {
                 alertDialog1.show();
             }
         });
+        courseLesson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(CreatedCourse.this,LessonManageActivity.class);
+                intent.putExtra("course",courseItem);
+                startActivity(intent);
+
+            }
+        });
     }
 
     private void deleteCourse() {
         alertDialog.show();
-        iMyService.deleteCourse("https://udemy-online-courses.herokuapp.com/course/delete/"+courseItem.getID(),sharedPreferences.getString("token","")).
+        iMyService.deleteCourse("http://52.152.163.79:9000/course/delete/"+courseItem.getID(),sharedPreferences.getString("token","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -238,7 +248,7 @@ public class CreatedCourse extends AppCompatActivity {
     private void updateWithoutImage() {
 
         alertDialog.show();
-        iMyService.courseUpdate1("https://udemy-online-courses.herokuapp.com/course/update/"+courseItem.getID(),name,goal,description,sendID,price,discount,sharedPreferences.getString("token","")).
+        iMyService.courseUpdate1("http://52.152.163.79:9000/course/update/"+courseItem.getID(),name,goal,description,sendID,price,discount,sharedPreferences.getString("token","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -342,7 +352,7 @@ public class CreatedCourse extends AppCompatActivity {
         // RequestBody description = RequestBody.create(MediaType.parse("text/plain"), "image-type");
 
         alertDialog.show();
-        iMyService.courseUpdate("https://udemy-online-courses.herokuapp.com/course/update/"+courseItem.getID(),part,name,goal,description,sendID,price,discount,sharedPreferences.getString("token","")).
+        iMyService.courseUpdate("http://52.152.163.79:9000/course/update/"+courseItem.getID(),part,name,goal,description,sendID,price,discount,sharedPreferences.getString("token","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){

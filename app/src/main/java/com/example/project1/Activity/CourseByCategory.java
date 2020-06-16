@@ -65,7 +65,7 @@ public class CourseByCategory extends AppCompatActivity {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
-        iMyService.getCourseByCategory("https://udemy-online-courses.herokuapp.com/course/getby-category/"+categoryItem.getID()).
+        iMyService.getCourseByCategory("http://52.152.163.79:9000/course/getby-category/"+categoryItem.getID()).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -91,7 +91,7 @@ public class CourseByCategory extends AppCompatActivity {
                             for(int i=0;i<ja.length();i++)
                             {
                                 JSONObject jo=ja.getJSONObject(i);
-                                courseItems.add(new courseItem( "https://udemy-online-courses.herokuapp.com/upload/course_image/"+jo.getString("image"),
+                                courseItems.add(new courseItem( "http://52.152.163.79:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),

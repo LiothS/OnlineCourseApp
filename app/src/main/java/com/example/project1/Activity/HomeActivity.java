@@ -98,6 +98,7 @@ public class HomeActivity extends AppCompatActivity {
         userAccount.setToken(sharedPreferences.getString("token","default"));
         userAccount.setMatkhau(sharedPreferences.getString("password","default"));
         bottomNav.setOnNavigationItemSelectedListener(bottomNavMethod);
+
         getSupportFragmentManager().beginTransaction().replace(R.id.container,new featuredFragment()).commit();
         suggestionAdapter=new ArrayAdapter<>(HomeActivity.this,R.layout.suggestion);
         homeTB.setVisibility(GONE);
@@ -126,6 +127,11 @@ public class HomeActivity extends AppCompatActivity {
                    homeTB.setTitle("Khóa học đã tạo");
                    getSupportFragmentManager().beginTransaction().replace(R.id.container,new createdCourseFragment()).commit();
                }
+                if(text.equals("Khóa đã tham gia"))
+                {
+                    homeTB.setTitle("Đã tham gia");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container,new mycoursesFragment()).commit();
+                }
 
 
 
@@ -163,7 +169,7 @@ public class HomeActivity extends AppCompatActivity {
                    homeTB.setVisibility(View.VISIBLE);
                    fragment=new mycoursesFragment();
 
-                   homeTB.setTitle("Courses");
+                   homeTB.setTitle("Đã tham gia");
                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(HomeActivity.this,
                            R.array.numbers, android.R.layout.simple_spinner_item);
                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

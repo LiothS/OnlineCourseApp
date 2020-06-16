@@ -51,7 +51,7 @@ public class topCourseAdapter extends RecyclerView.Adapter<topCourseAdapter.Cust
         else
         holder.fee.setText(formattedNumber1+" đ");
 
-        Picasso.get().load(items.get(position).getUrl()).placeholder(R.drawable.empty).error(R.drawable.empty).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.imageView);
+        Picasso.get().load(items.get(position).getUrl()).placeholder(R.drawable.empty2).error(R.drawable.empty2).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.imageView);
         holder.ratingBar.setRating((float) 4.5);
         holder.totalVote.setText("("+(int)items.get(position).getTotalVote()+")");
         if(items.get(position).getDiscount()!=0)
