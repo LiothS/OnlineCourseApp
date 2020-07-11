@@ -88,7 +88,7 @@ public class OwnMultiChoiceAdapter extends RecyclerView.Adapter<OwnMultiChoiceAd
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(context).build();
         alertDialog.show();
-        iMyService.deleteFile("https://udemy-online-courses.herokuapp.com/lesson/delete-a-multiple-choice/"+LessonID+"/"+items.get(position).getId(), sharedPreferences.getString("token",null)).
+        iMyService.deleteFile("http://52.152.163.79:9000/lesson/delete-a-multiple-choice/"+LessonID+"/"+items.get(position).getId(), sharedPreferences.getString("token",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){

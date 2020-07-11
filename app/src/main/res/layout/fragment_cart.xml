@@ -5,7 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Fragment.cartFragment">
-
+  <Button
+      android:layout_width="match_parent"
+      android:layout_margin="20dp"
+      android:layout_height="wrap_content"
+      android:text="Thanh toán "
+      android:textColor="#fff"
+      android:background="@drawable/shadow_btn"
+      android:id="@+id/cartFragmentPayBtn"
+      />
   <androidx.recyclerview.widget.RecyclerView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"

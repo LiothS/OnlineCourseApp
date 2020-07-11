@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <androidx.cardview.widget.CardView
@@ -38,7 +38,7 @@
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:orientation="vertical">
@@ -50,37 +50,39 @@
                     android:textSize="15dp"
                     android:id="@+id/cartCourseName"
                     android:text="Tên bài review"
-
+                    android:ellipsize="end"
+                    android:maxLines="2"
                     android:outlineSpotShadowColor="#050101"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tác giả: "
+                    android:layout_marginTop="10dp"
                     android:id="@+id/cartCourseAuthor"
                     android:textColor="#000"
                     />
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <Button
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    >
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Thanh toán"
-                        android:background="#fff"
-                        android:textColor="#E91E63"
-                        android:id="@+id/payBtn"
-                        android:textStyle="bold"
+                        android:text="220.000 đ"
+                        android:id="@+id/cartCoursePrice"
+                        android:textSize="18dp"
+                        android:layout_marginRight="5dp"
+                        android:textColor="#000"
                         />
-                    <Button
-
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Xóa"
-                        android:background="#fff"
-                        android:id="@+id/deleteInCart"
-                        android:textColor="#E91E63"
-                        android:textStyle="bold"
+                        android:text="220.000 đ"
+                        android:id="@+id/cartCourseDiscount"
+                        android:textSize="13dp"
+                        android:textColor="#792727"
                         />
                 </LinearLayout>
 
@@ -89,6 +91,13 @@
 
 
         </LinearLayout>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_cancel_black_24dp"
+            android:id="@+id/deleteFromCart"
+            />
 
     </androidx.cardview.widget.CardView>
 

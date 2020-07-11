@@ -140,7 +140,7 @@ public interface IMyService {
             @Part List<MultipartBody.Part> files,
             @Header("auth-token") String authToken);
     @GET
-    Observable<String>  getLesson(@Url String urlGet);
+    Observable<String>  getLesson(@Url String urlGet,  @Header("auth-token") String authToken);
     @PUT
     @FormUrlEncoded
     Observable<String>  updateLessonInfo(@Url String urlGet,
@@ -178,6 +178,14 @@ public interface IMyService {
     @GET
     Observable<String>  getListComment(@Url String urlGet);
 
+    @POST("lesson/submit-test")
+    Observable<String> submitTest (@Body RequestBody body,
+
+                                             @Header("auth-token") String authToken);
+    @POST("/payment/pay")
+    Observable<String> pay (@Body RequestBody body
+
+                                   );
 
 
 

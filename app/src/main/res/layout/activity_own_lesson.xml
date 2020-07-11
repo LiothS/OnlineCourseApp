@@ -158,11 +158,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="Quản lí câu hỏi trắc nghiệm"
+                    android:text="Popup Question"
                     android:background="@drawable/save_button"
                     android:textColor="@color/white"
                     android:padding="0dp"
                     android:id="@+id/multipleChoiceManage"
+
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif"
+                    android:layout_gravity="center"
+
+
+                    />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="Câu hỏi trắc nghiệm"
+                    android:background="@drawable/save_button"
+                    android:textColor="@color/white"
+                    android:padding="0dp"
+                    android:id="@+id/quizManagement"
 
                     android:layout_marginTop="20dp"
                     android:fontFamily="sans-serif"

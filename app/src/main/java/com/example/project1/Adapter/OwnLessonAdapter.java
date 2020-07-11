@@ -39,7 +39,7 @@ public class OwnLessonAdapter extends RecyclerView.Adapter<OwnLessonAdapter.Cust
         holder.textView1.setText(items.get(position).getOrder());
         holder.textView2.setText(items.get(position).getTitle());
         String info="";
-        info=info+ items.get(position).getMultiChoice().size()+" câu trắc nghiệm, "+ items.get(position).getFile().size()+ " file tài liệu";
+        info=info+ items.get(position).getMultiChoice().size()+" PopUp Question, "+ items.get(position).getFile().size()+ " file tài liệu";
         holder.textview3.setText(info);
 
 

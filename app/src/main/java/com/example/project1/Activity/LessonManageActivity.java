@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -96,7 +98,9 @@ public class LessonManageActivity extends AppCompatActivity {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
-        iMyService.getLesson("http://52.152.163.79:9000/lesson/get-lesson-by-id-course/"+courseItem.getID()).
+        SharedPreferences sharedPreferences;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        iMyService.getLesson("http://52.152.163.79:9000/lesson/get-lesson-by-id-course/"+courseItem.getID(),sharedPreferences.getString("token",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -128,6 +132,7 @@ public class LessonManageActivity extends AppCompatActivity {
                                 {
                                     files.add(ja1.getString(j));
                                 }
+                                //popUpQuestion
                                 ArrayList<MultiChoice> multiChoices=new ArrayList<>();
                                 JSONArray ja2=jo.getJSONArray("popupQuestion");
                                 for(int x=0;x<ja2.length();x++)
@@ -151,13 +156,37 @@ public class LessonManageActivity extends AppCompatActivity {
                                            img,
                                            jo1.getString("timeShow")));
                                 }
+                                //multiChoices
+                                ArrayList<MultiChoice> quiz=new ArrayList<>();
+                                JSONArray ja3=jo.getJSONArray("multipleChoices");
+                                for(int x=0;x<ja3.length();x++)
+                                {
+
+                                    JSONObject jo2=ja3.getJSONObject(x);
+                                    String img1="";
+                                    try {
+                                        img1=jo2.getString("image");
+                                    }
+                                    catch(Exception e) {
+                                        img1="";
+                                    }
+                                   quiz.add(new MultiChoice(jo2.getString("_id"),
+                                            jo2.getString("A"),
+                                            jo2.getString("B"),
+                                            jo2.getString("C"),
+                                            jo2.getString("D"),
+                                            jo2.getString("answer"),
+                                            jo2.getString("question"),
+                                            img1,
+                                           ""));
+                                }
                                 lessons.add(new Lesson(jo.getString("_id"),
                                         jo.getString("video"),
                                         jo.getString("idCourse"),
                                         jo.getString("title"),
                                         jo.getString("order"),
                                         files,
-                                        multiChoices));
+                                        multiChoices,quiz));
                                 ownLessonAdapter.notifyDataSetChanged();
 
 

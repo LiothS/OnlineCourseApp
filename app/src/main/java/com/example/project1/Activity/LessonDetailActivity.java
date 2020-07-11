@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +54,7 @@ public class LessonDetailActivity extends AppCompatActivity {
     ImageView imgView;
     ArrayList<MultiChoice> multiChoiceArrayList=new ArrayList<>();
     Handler handler=new Handler();
+    Button doTestBtn;
 
 
     @Override
@@ -60,6 +63,7 @@ public class LessonDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lesson_detail);
         tabLayout=findViewById(R.id.tabLayout);
         viewPager=findViewById(R.id.viewPager);
+        doTestBtn=findViewById(R.id.doTestBtn);
         lesson= (Lesson) getIntent().getSerializableExtra("lesson");
         multiChoiceArrayList=lesson.getMultiChoice();
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
@@ -68,12 +72,20 @@ public class LessonDetailActivity extends AppCompatActivity {
         viewPagerAdapter.AddFragment(new QnAFragment(lesson),"Thảo luận");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-
+        doTestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LessonDetailActivity.this,DoingTestActivity.class);
+                intent.putExtra("lesson",lesson);
+                startActivity(intent);
+            }
+        });
 
         playerView=findViewById(R.id.exoVideoView);
         videoInit();
         if(multiChoiceArrayList.size()>0)
         trackVideo.run();
+
 
     }
     private void pausePlayer(){

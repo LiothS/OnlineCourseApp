@@ -1,5 +1,6 @@
 package com.example.project1.Fragment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -11,8 +12,11 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.project1.Activity.PayActivity;
+import com.example.project1.Activity.UserInfoActivity;
 import com.example.project1.Adapter.CartCourseAdapter;
 import com.example.project1.Model.courseItem;
 import com.example.project1.R;
@@ -22,6 +26,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import maes.tech.intentanim.CustomIntent;
+
 
 public class cartFragment extends Fragment {
 
@@ -29,7 +35,7 @@ public class cartFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<courseItem> courseItems = new ArrayList<>();
     CartCourseAdapter cartCourseAdapter;
-
+    Button payBtn;
 
     public cartFragment() {
         // Required empty public constructor
@@ -47,11 +53,21 @@ public class cartFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView= inflater.inflate(R.layout.fragment_cart, container, false);
         recyclerView = rootView.findViewById(R.id.cartRecyclerView);
+        payBtn=rootView.findViewById(R.id.cartFragmentPayBtn);
         cartCourseAdapter=new CartCourseAdapter(courseItems,getContext());
         recyclerView.setAdapter(cartCourseAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
 
         LoadCourseInCart();
+        payBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), PayActivity.class);
+
+                startActivityForResult(intent,1);
+                CustomIntent.customType(getContext(),"left-to-right");
+            }
+        });
 
         return  rootView;
     }
@@ -66,7 +82,8 @@ public class cartFragment extends Fragment {
 
             for(int i=0;i<cartArray.length();i++){
                 JSONObject jo=cartArray.getJSONObject(i);
-                courseItems.add(new courseItem(jo.getString("courseImage"),jo.getString("title"),jo.getString("author"),jo.getString("courseID")));
+                courseItems.add(new courseItem(jo.getString("courseImage"),jo.getString("title"),jo.getString("author"),jo.getString("courseID"),
+                        Float.valueOf(jo.getString("price")),Float.valueOf(jo.getString("discount"))));
             }
             cartCourseAdapter.notifyDataSetChanged();
 

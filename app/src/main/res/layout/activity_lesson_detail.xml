@@ -21,6 +21,19 @@
         >
 
     </com.google.android.exoplayer2.ui.PlayerView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/shadow_btn"
+        android:textColor="#fff"
+        android:text="Làm kiểm tra"
+        android:textSize="15dp"
+        android:id="@+id/doTestBtn"
+        />
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"

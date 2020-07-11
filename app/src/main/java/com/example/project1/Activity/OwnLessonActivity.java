@@ -42,7 +42,7 @@ public class OwnLessonActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     EditText lessonTitle,lessonOrder;
-   Button updateBtn,multiChoiceBtn, videoBtn, deleteBtn, fileBtn;
+   Button updateBtn,multiChoiceBtn, videoBtn, deleteBtn, fileBtn,quizBtn;
     Lesson lesson;
     boolean flag=false;
     SharedPreferences sharedPreferences;
@@ -82,6 +82,14 @@ public class OwnLessonActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(OwnLessonActivity.this,LessonChoicesActivity.class);
+                intent.putExtra("lesson",lesson);
+                startActivityForResult(intent,3002);
+            }
+        });
+        quizBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(OwnLessonActivity.this,LessonTestActivity.class);
                 intent.putExtra("lesson",lesson);
                 startActivityForResult(intent,3002);
             }
@@ -234,5 +242,6 @@ public class OwnLessonActivity extends AppCompatActivity {
         videoBtn=findViewById(R.id.videoManage);
        deleteBtn=findViewById(R.id.deleteLesson);
         fileBtn=findViewById(R.id.fileManage);
+        quizBtn=findViewById(R.id.quizManagement);
     }
 }

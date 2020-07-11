@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 
 public class MultiChoice implements Serializable {
-    private String id,A,B,C,D,answer,question, image, timeShow;
+    private String id,A,B,C,D,answer,question, image, timeShow,userAnswer;
     private File file;
     public String getImage() {
         return image;
@@ -20,6 +20,14 @@ public class MultiChoice implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
     }
 
     public String getTimeShow() {
@@ -40,6 +48,7 @@ public class MultiChoice implements Serializable {
         this.question = question;
         this.image = image;
         this.timeShow = timeShow;
+        this.userAnswer="E";
     }
 
     public MultiChoice(String id, String a, String b, String c, String d, String answer, String question) {
@@ -50,6 +59,7 @@ public class MultiChoice implements Serializable {
         D = d;
         this.answer = answer;
         this.question = question;
+        this.userAnswer="E";
     }
     public MultiChoice(String id, String a, String b, String c, String d, String answer, String question, String image, String timeShow, File file) {
         this.id = id;
@@ -62,6 +72,7 @@ public class MultiChoice implements Serializable {
         this.timeShow=timeShow;
         this.image=image;
         this.file=file;
+        this.userAnswer="E";
     }
 
     public String getId() {

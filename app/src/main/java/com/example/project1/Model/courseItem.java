@@ -13,11 +13,13 @@ public class courseItem implements Serializable {
     public courseItem() {
     }
 
-    public courseItem(String url, String title, String author, String ID) {
+    public courseItem(String url, String title, String author, String ID, float price, float discount) {
         this.url = url;
         this.title = title;
         this.author = author;
         this.ID = ID;
+        this.price=price;
+        this.discount=discount;
     }
 
     private String desription;

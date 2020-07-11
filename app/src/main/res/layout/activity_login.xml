@@ -46,11 +46,9 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="E-mail"
-            app:boxStrokeColor="#000"
 
-            >
+            android:hint="E-mail"
+            app:boxStrokeColor="#000">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +59,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
             android:hint="Password"
             app:boxStrokeColor="#000"
             app:passwordToggleEnabled="true"

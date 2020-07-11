@@ -52,7 +52,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
+                        android:ellipsize="end"
+                        android:maxLines="2"
                         android:fontFamily="@font/antic"
                         android:text="Học từ cơ bản đến nâng cao "
                         android:textColor="@color/white"
@@ -64,18 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="2300 học viên"
-                            android:id="@+id/courseEnroll"
-                            android:drawableLeft="@drawable/ic_person_18dp"
-                            android:drawablePadding="5dp"
-                            android:textColor="@color/white"
-                            android:textSize="12dp"
-                            android:background="@drawable/detail_border1"
-                            app:fontFamily="@font/open_sans_semibold"
-                            android:layout_marginRight="10dp"/>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -146,6 +136,7 @@
                 android:text="220.000 đ"
                 android:id="@+id/courseOldPrice"
                 android:textSize="20dp"
+                android:fontFamily="@font/anton"
                 android:textColor="#792727"
                 />
         </LinearLayout>
@@ -153,44 +144,51 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mua Ngay"
+            android:layout_height="70dp"
+            android:text="Tham gia ngay"
             android:textAlignment="center"
             android:id="@+id/joinCourse"
             android:layout_marginTop="20dp"
             android:background="@drawable/save_button"
             android:textSize="20dp"
-
+            android:gravity="center"
             android:textColor="@color/white"
             android:fontFamily="@font/open_sans_bold"
             />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
 
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
             android:layout_marginRight="10dp"
             >
-
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <Button
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:paddingTop="25dp"
                 android:elevation="25dp"
                 android:id="@+id/addToCart"
                 android:paddingBottom="25dp"
-                android:background="@drawable/detail_border_btn"
+                android:background="#ec5252"
                 android:text="Thêm vào giỏ"
-                android:textSize="12dp"
-                android:textColor="#3F51B5"
-                android:layout_marginRight="10dp"
+                android:textSize="11dp"
+                android:textColor="#fff"
+
 
                 />
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
             <Button
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
                 android:paddingTop="25dp"
@@ -199,9 +197,10 @@
                 android:elevation="25dp"
                 android:id="@+id/writeComment"
                 android:textColor="#3F51B5"
-                android:textSize="12dp"
-                android:background="@drawable/detail_border_btn"
+                android:textSize="11dp"
+                android:background="#fff"
                 />
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
         <LinearLayout

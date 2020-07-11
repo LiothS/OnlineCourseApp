@@ -47,7 +47,7 @@ import static android.view.View.GONE;
 public class CourseDetail extends AppCompatActivity {
 
     ImageView courseImage;
-    TextView courseName,courseGoal,courseEnroll,courseRank,courseAuthor
+    TextView courseName,courseGoal,courseRank,courseAuthor
             ,courseUpdateTime,coursePrice,courseOldPrice,courseJoinBtn
             ,videoCount,fileCount, quizCount,courseDescription
             ,totalVote;
@@ -82,7 +82,7 @@ public class CourseDetail extends AppCompatActivity {
         try {
             cartArray= new JSONArray(sharedPreferences.getString("cartArray", "[]"));
             for (int i = 0; i < cartArray.length(); i++) {
-                Toast.makeText(this, "index: "+i, Toast.LENGTH_SHORT).show();
+
                 checkCart=true;
 
             }
@@ -92,25 +92,34 @@ public class CourseDetail extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JSONObject jo=new JSONObject();
-                try {
-                    jo.put("courseImage",courseItem.getUrl());
-                    jo.put("author",courseItem.getAuthor());
-                    jo.put("courseID",courseItem.getID());
-                    jo.put("title",courseItem.getTitle());
+                String stringFromJSONArray=cartArray.toString();
+                if(stringFromJSONArray.contains(courseItem.getID()))
+                    Toast.makeText(CourseDetail.this, "Khóa học đã có sẵn trong giỏ hàng !", Toast.LENGTH_SHORT).show();
+                else {
+                    JSONObject jo = new JSONObject();
+                    try {
+                        jo.put("courseImage", courseItem.getUrl());
+                        jo.put("author", courseItem.getAuthor());
+                        jo.put("courseID", courseItem.getID());
+                        jo.put("title", courseItem.getTitle());
+                        jo.put("price", courseItem.getPrice());
+                        jo.put("discount", courseItem.getDiscount());
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    cartArray.put(jo);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("cartArray", cartArray.toString());
+                    editor.apply();
+                    Toast.makeText(CourseDetail.this, "Thành công", Toast.LENGTH_SHORT).show();
                 }
-                cartArray.put(jo);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("cartArray",cartArray.toString());
-                editor.apply();
-                Toast.makeText(CourseDetail.this, "Thành công", Toast.LENGTH_SHORT).show();
+                addToCart.setEnabled(false);
 
             }
+
         });
-        courseDescription.setText(cartArray.toString());
+
     }
 
     private void setUp() {
@@ -120,6 +129,7 @@ public class CourseDetail extends AppCompatActivity {
         courseRank.setText("Xếp hạng "+courseItem.getRanking());
         courseAuthor.setText(courseItem.getAuthor());
         courseUpdateTime.setText("Cập nhật lúc "+courseItem.getUpdateTime());
+
         NumberFormat formatter = new DecimalFormat("#,###");
         double price=(double)courseItem.getPrice();
         double discount=(double)courseItem.getDiscount();
@@ -127,6 +137,7 @@ public class CourseDetail extends AppCompatActivity {
             coursePrice.setText("Miễn phí");
             courseJoinBtn.setText("Tham gia ngay");
             courseOldPrice.setVisibility(GONE);
+            addToCart.setVisibility(GONE);
         }else if(price!=0&&discount==0)
         {
             String formattedNumber1 = formatter.format(price);
@@ -216,7 +227,7 @@ public class CourseDetail extends AppCompatActivity {
         courseImage=findViewById(R.id.courseDetailImage);
         courseName=findViewById(R.id.courseDetailName);
         courseGoal=findViewById(R.id.courseDetailGoal);
-        courseEnroll=findViewById(R.id.courseEnroll);
+
         courseRank=findViewById(R.id.coursRank);
         courseAuthor=findViewById(R.id.courseAuthor);
         courseUpdateTime=findViewById(R.id.updateTime);
