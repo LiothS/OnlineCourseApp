@@ -1,14 +1,19 @@
 package com.example.project1.Activity;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.view.View;
@@ -16,16 +21,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.example.project1.Adapter.ViewPagerAdapter;
 import com.example.project1.Fragment.QnAFragment;
 import com.example.project1.Fragment.documentsFragment;
-import com.example.project1.Fragment.quizFragment;
 import com.example.project1.Model.Lesson;
 import com.example.project1.Model.MultiChoice;
 import com.example.project1.R;
+import com.example.project1.Retrofit.IMyService;
+import com.example.project1.Retrofit.RetrofitClient;
 import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
@@ -40,7 +46,22 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import dmax.dialog.SpotsDialog;
+import es.dmoral.toasty.Toasty;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Retrofit;
+
+import static android.nfc.NfcAdapter.EXTRA_DATA;
 
 public class LessonDetailActivity extends AppCompatActivity {
 
@@ -66,6 +87,7 @@ public class LessonDetailActivity extends AppCompatActivity {
         doTestBtn=findViewById(R.id.doTestBtn);
         lesson= (Lesson) getIntent().getSerializableExtra("lesson");
         multiChoiceArrayList=lesson.getMultiChoice();
+        if(lesson.getQuizTest().size()==0) doTestBtn.setVisibility(View.GONE);
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.AddFragment(new documentsFragment(lesson),"Tài liệu");
        // viewPagerAdapter.AddFragment(new quizFragment(),"Bài tập");
@@ -108,15 +130,16 @@ public class LessonDetailActivity extends AppCompatActivity {
         imgView=view.findViewById(R.id.questionImage);
     mbuilder.setView(view);
         AlertDialog alertDialog=mbuilder.create();
+        alertDialog.setCancelable(false);
         ansA.setText(multiChoiceArrayList.get(index).getA());
         ansB.setText(multiChoiceArrayList.get(index).getB());
         ansC.setText(multiChoiceArrayList.get(index).getC());
         ansD.setText(multiChoiceArrayList.get(index).getD());
         question.setText(multiChoiceArrayList.get(index).getQuestion());
-        Toast.makeText(this,multiChoiceArrayList.get(index).getImage() , Toast.LENGTH_SHORT).show();
-        if(multiChoiceArrayList.get(index).getImage().contains("."))
+        // Toast.makeText(this,multiChoiceArrayList.get(index).getImage() , Toast.LENGTH_SHORT).show();
+        if(multiChoiceArrayList.get(index).getImage().isEmpty()==false)
         {
-            Picasso.get().load("http://52.152.163.79:9000/upload/lesson/"+multiChoiceArrayList.get(index).getImage()).placeholder(R.drawable.empty2).error(R.drawable.empty2).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(imgView);
+            Picasso.get().load("http://13.68.245.234:9000/upload/lesson/"+multiChoiceArrayList.get(index).getImage()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(imgView);
             imgView.setVisibility(View.VISIBLE);
         }
         ansA.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +153,11 @@ public class LessonDetailActivity extends AppCompatActivity {
                     startPlayer();
                 }
                 else{
-                    Toast.makeText(LessonDetailActivity.this, "Chưa chính xác", Toast.LENGTH_SHORT).show();
+                    Toasty.error(LessonDetailActivity.this, "Chưa chính xác", Toast.LENGTH_SHORT).show();
+                    Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+
+                    vibe.vibrate(400);
                 }
             }
         });
@@ -145,7 +172,11 @@ public class LessonDetailActivity extends AppCompatActivity {
                     startPlayer();
                 }
                 else{
-                    Toast.makeText(LessonDetailActivity.this, "Chưa chính xác", Toast.LENGTH_SHORT).show();
+                    Toasty.error(LessonDetailActivity.this, "Chưa chính xác", Toast.LENGTH_SHORT).show();
+                    Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+
+                    vibe.vibrate(400);
                 }
             }
         });
@@ -161,7 +192,11 @@ public class LessonDetailActivity extends AppCompatActivity {
                     startPlayer();
                 }
                 else{
-                    Toast.makeText(LessonDetailActivity.this, "Chưa chính xác", Toast.LENGTH_SHORT).show();
+                    Toasty.error(LessonDetailActivity.this, "Chưa chính xác", Toast.LENGTH_SHORT).show();
+                    Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+
+                    vibe.vibrate(400);
                 }
             }
         });
@@ -176,7 +211,11 @@ public class LessonDetailActivity extends AppCompatActivity {
                     startPlayer();
                 }
                 else{
-                    Toast.makeText(LessonDetailActivity.this, "Chưa chính xác", Toast.LENGTH_SHORT).show();
+                    Toasty.error(LessonDetailActivity.this, "Chưa chính xác", Toast.LENGTH_SHORT).show();
+                    Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+
+                    vibe.vibrate(400);
                 }
             }
         });
@@ -208,12 +247,84 @@ public class LessonDetailActivity extends AppCompatActivity {
         simpleExoPlayer= ExoPlayerFactory.newSimpleInstance(this);
         playerView.setPlayer(simpleExoPlayer);
         DataSource.Factory datasource=new DefaultDataSourceFactory(this, Util.getUserAgent(this,"lesson_video"));
-        MediaSource videoSource=new ExtractorMediaSource.Factory(datasource).createMediaSource(Uri.parse("http://52.152.163.79:9000/upload/lesson/"+lesson.getVideo()));
+        MediaSource videoSource=new ExtractorMediaSource.Factory(datasource).createMediaSource(Uri.parse("http://13.68.245.234:9000/upload/lesson/"+lesson.getVideo()));
 
         simpleExoPlayer.prepare(videoSource);
         simpleExoPlayer.setPlayWhenReady(true);
+       simpleExoPlayer.addListener(new Player.EventListener() {
+           @Override
+           public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+               if(playbackState==Player.STATE_ENDED){
+                   Toasty.success(LessonDetailActivity.this,"Bạn đã hoàn thành bài học này").show();
+                   PostCompleteLesson();
+               }
+           }
+       });
 
     }
+
+    private void PostCompleteLesson() {
+        IMyService iMyService;
+        AlertDialog alertDialog;
+        Retrofit retrofitClient= RetrofitClient.getInstance();
+        iMyService=retrofitClient.create(IMyService.class);
+        alertDialog= new SpotsDialog.Builder().setContext(this).build();
+        SharedPreferences sharedPreferences;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LessonDetailActivity.this);
+        JSONObject jo=new JSONObject();
+        try {
+            jo.put("isCompleted",1);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), jo.toString());
+        iMyService.updateProgress("http://13.68.245.234:9000/join/update-progress-lesson-of-course/"+sharedPreferences.getString("id",null)+"/"+
+                lesson.getIdcourse()+"/"+lesson.getID(),body).
+                subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>(){
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onNext(String response) {
+
+                        //Toast.makeText(LessonDetailActivity.this, response, Toast.LENGTH_SHORT).show();
+
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        // Toasty.error(CourseDetail.this, "Bạn chưa hoàn thành 80% khóa học", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+
+
+
+                    }
+                });
+    }
+    @Override
+    public void onBackPressed() {
+        final Intent data = new Intent();
+        data.putExtra(EXTRA_DATA, "success");
+        setResult(Activity.RESULT_OK, data);
+
+        finish();
+    }
+
     int index=0;
     private Runnable trackVideo= new Runnable() {
         @Override
@@ -232,6 +343,7 @@ public class LessonDetailActivity extends AppCompatActivity {
                 ShowQuestionDialog();
 
              }
+
 
             handler.postDelayed(this,1000);
         }

@@ -1,12 +1,15 @@
 package com.example.project1.Fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -72,7 +75,7 @@ public class mycoursesFragment extends Fragment {
         courseAdapter=new JoinedCourseAdapter(courseItems,getActivity());
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         courseAdapter.setHasStableIds(true);
-
+       // Toast.makeText(getContext(), sharedPreferences.getString("id",null), Toast.LENGTH_LONG).show();
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(courseAdapter);
         getJoinedCoure();
@@ -88,7 +91,7 @@ public class mycoursesFragment extends Fragment {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(getContext()).build();
         alertDialog.show();
-        iMyService.getJoinedCourse("http://52.152.163.79:9000/join/get-courses-joined-by-user/"+sharedPreferences.getString("id","")).
+        iMyService.getJoinedCourse("http://13.68.245.234:9000/join/get-courses-joined-by-user/"+sharedPreferences.getString("id","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -103,6 +106,7 @@ public class mycoursesFragment extends Fragment {
 
                         flag=true;
                         temp=response;
+
 
 
 
@@ -142,16 +146,21 @@ public class mycoursesFragment extends Fragment {
 
                                 //JSONObject jsonObject=new JSONObject(temp);
 
+
                                 JSONArray ja=new JSONArray(temp);
                                 // JSONArray jsonArray=jsonObject.getJSONArray("");
                                 for(int i=0;i<ja.length();i++)
                                 {
+
                                     JSONObject jo=ja.getJSONObject(i);
                                     JSONObject jo2=jo.getJSONObject("idCourse");
                                     courseItem ci=new courseItem();
                                     ci.setID(jo2.getString("_id"));
                                     ci.setTitle(jo2.getString("name"));
-                                    ci.setUrl("http://52.152.163.79:9000/upload/course_image/"+jo2.getString("image"));
+                                    ci.setUrl("http://13.68.245.234:9000/upload/course_image/"+jo2.getString("image"));
+                                    ci.setPercent(jo.getInt("percentCompleted"));
+
+                                    ci.setCreateAt(jo.getString("created_at"));
                                     courseItems.add(ci);
                                     courseAdapter.notifyDataSetChanged();
 
@@ -174,5 +183,23 @@ public class mycoursesFragment extends Fragment {
         //tv.setText(temp);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(getContext(), "asdasdasdasdasd", Toast.LENGTH_SHORT).show();
+        if(requestCode == 1903) {
 
+
+            if(resultCode == Activity.RESULT_OK) {
+                courseItems.clear();
+                courseAdapter.notifyDataSetChanged();
+                getJoinedCoure();
+
+
+            } else {
+
+            }
+        }
+    }
 }
+

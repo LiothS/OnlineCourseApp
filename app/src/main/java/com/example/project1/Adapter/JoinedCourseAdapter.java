@@ -1,19 +1,18 @@
 package com.example.project1.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project1.Activity.CourseDetail;
 import com.example.project1.Activity.JoinedCourseLessons;
 import com.example.project1.Model.courseItem;
 import com.example.project1.R;
@@ -21,8 +20,6 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class JoinedCourseAdapter extends RecyclerView.Adapter<JoinedCourseAdapter.CustomViewHolder> {
@@ -46,7 +43,11 @@ public class JoinedCourseAdapter extends RecyclerView.Adapter<JoinedCourseAdapte
         holder.title.setText(items.get(position).getTitle());
 
 
-        Picasso.get().load(items.get(position).getUrl()).placeholder(R.drawable.empty2).error(R.drawable.empty2).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.imageView);
+        Picasso.get().load(items.get(position).getUrl()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.imageView);
+        holder.joinedAt.setText(items.get(position).getCreateAt());
+        holder.progressBar.setProgress(items.get(position).getPercent());
+        holder.percentText.setText(""+items.get(position).getPercent()+"%");
+
 
 
     }
@@ -66,24 +67,30 @@ public class JoinedCourseAdapter extends RecyclerView.Adapter<JoinedCourseAdapte
     }
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView title, joinedAt;
+        private TextView title, joinedAt,percentText;
         private ImageView imageView;
+        ProgressBar progressBar;
 
         public CustomViewHolder(View view) {
             super(view);
             title=view.findViewById(R.id.joinedCourseName1);
            joinedAt=view.findViewById(R.id.joinedAt);
             imageView=view.findViewById(R.id.joinedCourseImg);
+            progressBar=view.findViewById(R.id.joinedCourseProgressbar);
+            percentText=view.findViewById(R.id.joinedCoursePercent);
 
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Intent intent=new Intent(context, JoinedCourseLessons.class);
                     intent.putExtra("course",items.get(getAdapterPosition()));
-                    context.startActivity(intent);
+
+                    ((Activity) context).startActivityForResult(intent,1903);
                 }
             });
         }
     }
+
 }

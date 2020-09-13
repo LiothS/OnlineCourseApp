@@ -52,7 +52,7 @@ public class accountFragment extends Fragment {
 
     private CircleImageView circleImageView;
     TextView Name,Email;
-    String URLDefault="http://52.152.163.79:9000/upload/user_image/";
+    String URLDefault="http://13.68.245.234:9000/upload/user_image/";
     UserAccount userAccount;
 
     public accountFragment() {

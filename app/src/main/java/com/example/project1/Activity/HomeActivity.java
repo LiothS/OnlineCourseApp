@@ -160,9 +160,10 @@ public class HomeActivity extends AppCompatActivity {
                case R.id.search_frag:
                    homeTB.setVisibility(View.VISIBLE);
                    fragment=new searchFragment();
-                    searchView.setVisibility(View.VISIBLE);
+
                     spinner.setVisibility(GONE);
                    homeTB.setTitle("");
+                   homeTB.setVisibility(GONE);
                    homeTB.setTitleTextColor(-1);
                    break;
                case R.id.my_course_frag:

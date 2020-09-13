@@ -186,6 +186,14 @@ public interface IMyService {
     Observable<String> pay (@Body RequestBody body
 
                                    );
+    @POST("rate/create-rate")
+
+    Observable<String>  postRating(@Body RequestBody body);
+    @PUT
+    Observable<String> updateProgress (@Url String urlGet,
+                                             @Body RequestBody body
+
+                                            );
 
 
 

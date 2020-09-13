@@ -51,6 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dmax.dialog.SpotsDialog;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -228,7 +229,7 @@ public class CreateLesson extends AppCompatActivity {
 
                         if( flag1==true)
                         {
-                            Toast.makeText(CreateLesson.this, "Tạo thành công", Toast.LENGTH_SHORT).show();
+                            Toasty.success(CreateLesson.this, "Tạo thành công", Toast.LENGTH_SHORT).show();
                             final Intent data = new Intent();
 
 
@@ -245,7 +246,7 @@ public class CreateLesson extends AppCompatActivity {
 
                     }
                 });
-        Toast.makeText(this, "size: "+ parts.size(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "size: "+ parts.size(), Toast.LENGTH_SHORT).show();
 
     }
     @Override

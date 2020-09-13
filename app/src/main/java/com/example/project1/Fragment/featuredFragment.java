@@ -79,7 +79,7 @@ public class featuredFragment extends Fragment {
 
         imageList.add(new SlideModel("https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80", "“The authority of those who teach is often an obstacle to those who want to learn.”-Marcus Tullius Cicero", true));
         imageList.add(new SlideModel("https://learnworthy.net/wp-content/uploads/2019/12/Why-programming-is-the-skill-you-have-to-learn.jpg","“The ink of the scholar is more holy than the blood of the martyr”― Anonymous, Qurʾan"));
-        imageList.add(new SlideModel("https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80", "Giảm giá các khóa học về âm nhạc và nghệ thuật \n "));
+        imageList.add(new SlideModel("https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80", "“The more that you read, the more things you will know. The more that you learn, the more places you’ll go.” – Dr.  Seus"));
 
         imageSlider.setImageList(imageList,true);
         //load category
@@ -150,7 +150,7 @@ boolean flag_category=false;
                                 String tempName=jo.getString("name");
                                 String tempID=jo.getString("_id");
                                 String img=jo.getString("image");
-                              items.add(new category_item(tempName,tempID,"http://52.152.163.79:9000/upload/category/"+img));
+                              items.add(new category_item(tempName,tempID,"http://13.68.245.234:9000/upload/category/"+img));
                               adapter.notifyDataSetChanged();
 
                                 flag_category=true;
@@ -238,7 +238,7 @@ boolean flag_category=false;
                             {
                                 JSONObject jo=ja.getJSONObject(i);
 
-                                courseItems3.add(new courseItem( "http://52.152.163.79:9000/upload/course_image/"+jo.getString("image"),
+                                courseItems3.add(new courseItem( "http://13.68.245.234:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),
@@ -335,7 +335,7 @@ boolean flag_category=false;
                             for(int i=0;i<ja.length();i++)
                             {
                                 JSONObject jo=ja.getJSONObject(i);
-                                courseItems2.add(new courseItem( "http://52.152.163.79:9000/upload/course_image/"+jo.getString("image"),
+                                courseItems2.add(new courseItem( "http://13.68.245.234:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),
@@ -433,7 +433,7 @@ boolean flag_category=false;
                             for(int i=0;i<ja.length();i++)
                             {
                                 JSONObject jo=ja.getJSONObject(i);
-                                courseItems.add(new courseItem( "http://52.152.163.79:9000/upload/course_image/"+jo.getString("image"),
+                                courseItems.add(new courseItem( "http://13.68.245.234:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),

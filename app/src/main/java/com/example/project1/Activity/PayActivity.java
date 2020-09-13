@@ -41,6 +41,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import dmax.dialog.SpotsDialog;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -56,7 +57,7 @@ public class PayActivity extends AppCompatActivity {
     CardInputWidget cardInputWidget;
     TextInputEditText emailEditText, nameEditText;
     Button payBtn;
-    TextView result;
+
     SharedPreferences sharedPreferences;
     JSONArray cartArray=new JSONArray();
     JSONObject sendJO=new JSONObject();
@@ -68,7 +69,8 @@ public class PayActivity extends AppCompatActivity {
         emailEditText=findViewById(R.id.payEmail);
         nameEditText=findViewById(R.id.payName);
         payBtn=findViewById(R.id.payBtn);
-        result=findViewById(R.id.result);
+        emailEditText.setVisibility(View.GONE);
+        nameEditText.setVisibility(View.GONE);
         cardInputWidget.setPostalCodeEnabled(false);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         try {
@@ -159,7 +161,7 @@ public class PayActivity extends AppCompatActivity {
                                 }
                                 emailEditText.setVisibility(View.GONE);
                                 nameEditText.setVisibility(View.GONE);
-                                result.setText(sendJO.toString());
+
                                 Pay();
 
                             }
@@ -229,8 +231,15 @@ public class PayActivity extends AppCompatActivity {
 
                         if(flag==true)
                         {
-                            Toast.makeText(PayActivity.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
-                            result.setText(resultTemp);
+                            final Intent data = new Intent();
+
+
+                            data.putExtra(EXTRA_DATA, "success");
+                            data.putExtra("isPaid",true);
+
+                            setResult(Activity.RESULT_OK, data);
+                            finish();
+                            Toasty.success(PayActivity.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
 
 
                         }

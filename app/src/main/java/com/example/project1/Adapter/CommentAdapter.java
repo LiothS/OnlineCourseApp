@@ -1,16 +1,13 @@
 package com.example.project1.Adapter;
 
 import android.app.Activity;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,8 +45,8 @@ private Lesson lesson;
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.CustomViewHolder holder, int position) {
         if(!items.get(position).getCmtImg().isEmpty())
-            Picasso.get().load("http://52.152.163.79:9000/upload/comment_image/"+items.get(position).getCmtImg()).placeholder(R.drawable.empty).error(R.drawable.empty).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.cmtImg);
-        Picasso.get().load(items.get(position).getAvatar()).placeholder(R.drawable.empty2).error(R.drawable.empty2).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.userAvatar);
+            Picasso.get().load("http://13.68.245.234:9000/upload/comment_image/"+items.get(position).getCmtImg()).placeholder(R.drawable.empty).error(R.drawable.empty).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.cmtImg);
+        Picasso.get().load(items.get(position).getAvatar()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.userAvatar);
 
         if(items.get(position).getCmtImg().isEmpty()) holder.cmtImg.setVisibility(GONE);
     if(items.get(position).getChildrenComments().length()>0) holder.moreCmt.setVisibility(View.VISIBLE);

@@ -26,7 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project1.Adapter.CommentAdapter;
-import com.example.project1.Adapter.OwnLessonAdapter;
 import com.example.project1.Model.Lesson;
 import com.example.project1.Model.UserComment;
 import com.example.project1.R;
@@ -119,9 +118,9 @@ public class CommentDetailActivity extends AppCompatActivity {
         userComment= (UserComment) getIntent().getSerializableExtra("comment");
         lesson= (Lesson) getIntent().getSerializableExtra("lesson");
         if(userComment!=null){
-        Picasso.get().load(userComment.getAvatar()).placeholder(R.drawable.empty2).error(R.drawable.empty2).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(parentAvatar);
+        Picasso.get().load(userComment.getAvatar()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(parentAvatar);
         if(!userComment.getCmtImg().isEmpty())
-        Picasso.get().load("http://52.152.163.79:9000/upload/comment_image"+userComment.getCmtImg()).placeholder(R.drawable.empty).error(R.drawable.empty).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(contentImg);
+        Picasso.get().load("http://13.68.245.234:9000/upload/comment_image"+userComment.getCmtImg()).placeholder(R.drawable.empty).error(R.drawable.empty).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(contentImg);
         else contentImg.setVisibility(View.GONE);
         cmtContent.setText(userComment.getContent());
         cmtUserName.setText(userComment.getUserName());}
@@ -265,7 +264,7 @@ public class CommentDetailActivity extends AppCompatActivity {
 
         alertDialog= new SpotsDialog.Builder().setContext(CommentDetailActivity.this).build();
         //alertDialog.show();
-        iMyService.getListComment("http://52.152.163.79:9000/comment/get-child-comment-by-id-parent/"+userComment.getID()).
+        iMyService.getListComment("http://13.68.245.234:9000/comment/get-child-comment-by-id-parent/"+userComment.getID()).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -316,7 +315,7 @@ public class CommentDetailActivity extends AppCompatActivity {
                                 {
                                     JSONObject jsonObject=jsonArray.getJSONObject(i);
                                     String name=jsonObject.getJSONObject("idUser").getString("name");
-                                    String img="http://52.152.163.79:9000/upload/user_image/"+jsonObject.getJSONObject("idUser").getString("image");
+                                    String img="http://13.68.245.234:9000/upload/user_image/"+jsonObject.getJSONObject("idUser").getString("image");
                                     userComments.add(new UserComment(jsonObject.getString("_id"), img, name, jsonObject.getString("content"), jsonObject.getJSONArray("childComment"),
                                             jsonObject.getString("image"),jsonObject.getString("idParent")));
                                     commentAdapter.notifyDataSetChanged();

@@ -9,8 +9,17 @@ public class Lesson implements Serializable {
     private ArrayList<String> file;
     private ArrayList<MultiChoice> multiChoice;
     private ArrayList<MultiChoice> quizTest;
+    private boolean isComplete;
 
-    public Lesson(String ID, String video, String idcourse, String title, String order, ArrayList<String> file,ArrayList<MultiChoice> multiChoice) {
+    public boolean isComplete() {
+        return isComplete;
+    }
+
+    public void setComplete(boolean complete) {
+        isComplete = complete;
+    }
+
+    public Lesson(String ID, String video, String idcourse, String title, String order, ArrayList<String> file, ArrayList<MultiChoice> multiChoice) {
         this.ID = ID;
         this.video = video;
         this.idcourse = idcourse;
@@ -37,6 +46,17 @@ public class Lesson implements Serializable {
         this.file = file;
         this.multiChoice = multiChoice;
         this.quizTest=quiz;
+    }
+    public Lesson(String ID, String video, String idcourse, String title, String order, ArrayList<String> file, ArrayList<MultiChoice> multiChoice, ArrayList<MultiChoice> quiz,boolean cpl) {
+        this.ID = ID;
+        this.video = video;
+        this.idcourse = idcourse;
+        this.title = title;
+        this.order = order;
+        this.file = file;
+        this.multiChoice = multiChoice;
+        this.quizTest=quiz;
+        this.isComplete=cpl;
     }
 
     public String getID() {

@@ -1,6 +1,5 @@
 package com.example.project1.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -24,8 +23,6 @@ import java.util.ArrayList;
 
 import maes.tech.intentanim.CustomIntent;
 
-import static android.view.View.GONE;
-
 public class ParentCommentAdapter extends RecyclerView.Adapter<ParentCommentAdapter.CustomViewHolder> {
     private ArrayList<UserComment> items;
     private Context context;
@@ -46,7 +43,7 @@ public class ParentCommentAdapter extends RecyclerView.Adapter<ParentCommentAdap
     @Override
     public void onBindViewHolder(@NonNull ParentCommentAdapter.CustomViewHolder holder, int position) {
 
-        Picasso.get().load(items.get(position).getAvatar()).placeholder(R.drawable.empty2).error(R.drawable.empty2).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.userAvatar);
+        Picasso.get().load(items.get(position).getAvatar()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.userAvatar);
 
 
         holder.userName.setText(items.get(position).getUserName());

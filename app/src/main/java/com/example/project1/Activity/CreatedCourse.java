@@ -66,6 +66,7 @@ public class CreatedCourse extends AppCompatActivity {
     ArrayList<String> categoriesID=new ArrayList<String>();
     File file;
     Spinner spinner;
+    TextView tenkhoahoc,tacgia,doanhthu,hocvien;
     String name,goal,description,price,discount;
     IMyService iMyService;
     AlertDialog alertDialog;
@@ -85,10 +86,18 @@ public class CreatedCourse extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
        courseItem= (com.example.project1.Model.courseItem) getIntent().getSerializableExtra("course");
        AnhXa();
+       tenkhoahoc=findViewById(R.id.createdCourseName);
+       tenkhoahoc.setText(courseItem.getTitle());
+       tacgia=findViewById(R.id.createdCourseAuthor);
+       tacgia.setText(courseItem.getAuthor());
+       doanhthu=findViewById(R.id.doanhthu);
+       hocvien=findViewById(R.id.soluonghocvien);
        ActionToolBar();
        categoriesName.add(courseItem.getCategoryName());
        categoriesID.add(courseItem.getCategoryID());
        getAllCategory();
+       GetDoanhThu();
+       GetHocVien();
        courseName.setText(courseItem.getTitle());
        courseGoal.setText(courseItem.getGoal());
        courseDescription.setText(courseItem.getDesription());
@@ -171,10 +180,146 @@ public class CreatedCourse extends AppCompatActivity {
             }
         });
     }
+    boolean flag5=false;
+    String hocvientemp="";
+    private void GetHocVien() {
+        iMyService.getListComment("http://13.68.245.234:9000/join/get-total-student-join-course/"+courseItem.getID()).
+                subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>(){
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onNext(String response) {
+
+
+
+
+                        hocvientemp=response;
+
+                        //JSONObject jsonObject=new JSONObject(temp);
+
+                       flag5=true;
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        alertDialog.dismiss();
+
+                                    }
+                                }, 500);
+                        Toast.makeText(CreatedCourse.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        alertDialog.dismiss();
+
+                                    }
+                                }, 500);
+
+                        if(flag5==true)
+                        {
+                            try {
+                               JSONArray jsonArray=new JSONArray(hocvientemp);
+                               hocvien.setText(""+jsonArray.getJSONObject(0).getInt("Total"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else{hocvien.setText("0");}
+                            //Toast.makeText(CreatedCourse.this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
+    boolean flag6=false;
+    private void GetDoanhThu() {
+        iMyService.getListComment("http://13.68.245.234:9000/order/get-total-revenue-by-id-course/"+courseItem.getID()).
+                subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>(){
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onNext(String response) {
+
+
+
+                        String temp=response;
+                        Toast.makeText(CreatedCourse.this, response, Toast.LENGTH_SHORT).show();
+
+
+                        //JSONObject jsonObject=new JSONObject(temp);
+
+                        try {
+                            JSONObject jsonObject=new JSONObject(response);
+                            doanhthu.setText(""+jsonObject.getInt("Total"));
+
+
+                            flag6=true;
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        alertDialog.dismiss();
+
+                                    }
+                                }, 500);
+                        doanhthu.setText("0");
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        alertDialog.dismiss();
+
+                                    }
+                                }, 500);
+
+                        if(flag6==true)
+                        {
+
+                        }
+                        else{hocvien.setText("0");}
+                            //Toast.makeText(CreatedCourse.this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
 
     private void deleteCourse() {
         alertDialog.show();
-        iMyService.deleteCourse("http://52.152.163.79:9000/course/delete/"+courseItem.getID(),sharedPreferences.getString("token","")).
+        iMyService.deleteCourse("http://13.68.245.234:9000/course/delete/"+courseItem.getID(),sharedPreferences.getString("token","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -248,7 +393,7 @@ public class CreatedCourse extends AppCompatActivity {
     private void updateWithoutImage() {
 
         alertDialog.show();
-        iMyService.courseUpdate1("http://52.152.163.79:9000/course/update/"+courseItem.getID(),name,goal,description,sendID,price,discount,sharedPreferences.getString("token","")).
+        iMyService.courseUpdate1("http://13.68.245.234:9000/update/"+courseItem.getID(),name,goal,description,sendID,price,discount,sharedPreferences.getString("token","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -352,7 +497,7 @@ public class CreatedCourse extends AppCompatActivity {
         // RequestBody description = RequestBody.create(MediaType.parse("text/plain"), "image-type");
 
         alertDialog.show();
-        iMyService.courseUpdate("http://52.152.163.79:9000/course/update/"+courseItem.getID(),part,name,goal,description,sendID,price,discount,sharedPreferences.getString("token","")).
+        iMyService.courseUpdate("http://13.68.245.234:9000/course/update/"+courseItem.getID(),part,name,goal,description,sendID,price,discount,sharedPreferences.getString("token","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -371,6 +516,7 @@ public class CreatedCourse extends AppCompatActivity {
 
 
                         String temp=response;
+                        Toast.makeText(CreatedCourse.this, response, Toast.LENGTH_SHORT).show();
 
                         //JSONObject jsonObject=new JSONObject(temp);
 
@@ -470,20 +616,20 @@ public class CreatedCourse extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK && requestCode == 1000){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 1000) {
             //set image to image view
 
-            Uri path=data.getData();
+            Uri path = data.getData();
             try {
 
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
                 courseImage.setImageBitmap(bitmap);
                 file = new File(getRealPathFromURI(path));
-                flag2=true;
+                flag2 = true;
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
 
         }

@@ -103,7 +103,7 @@ String temp="";
 
         alertDialog= new SpotsDialog.Builder().setContext(getContext()).build();
         alertDialog.show();
-        iMyService.getListComment("http://52.152.163.79:9000/comment/get-parent-comment-by-lesson/"+lesson.getIdcourse()+"/"+lesson.getID()+"/0/0").
+        iMyService.getListComment("http://13.68.245.234:9000/comment/get-parent-comment-by-lesson/"+lesson.getIdcourse()+"/"+lesson.getID()+"/0/0").
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -153,7 +153,7 @@ String temp="";
                               {
                                    JSONObject jsonObject=jsonArray.getJSONObject(i);
                                    String name=jsonObject.getJSONObject("idUser").getString("name");
-                                   String img="http://52.152.163.79:9000/upload/user_image/"+jsonObject.getJSONObject("idUser").getString("image");
+                                   String img="http://13.68.245.234:9000/upload/user_image/"+jsonObject.getJSONObject("idUser").getString("image");
                                    items.add(new UserComment(jsonObject.getString("_id"), img, name, jsonObject.getString("content"), jsonObject.getJSONArray("childComment"),
                                            jsonObject.getString("image"),jsonObject.getString("idParent")));
                                    parentCommentAdapter.notifyDataSetChanged();

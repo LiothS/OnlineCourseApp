@@ -72,7 +72,7 @@ public class RegisActivity extends AppCompatActivity {
     String mobile = "";
     String password = "";
     String DateOfBirth ="";
-    public static final String URL = "http://52.152.163.79:9000/register";
+    public static final String URL = "http://13.68.245.234:9000/register";
     String reEnterPassword = "";
     String DiaChi="",MoTa="",GioiTinh="",token="";
     UserAccount userAccount;
@@ -103,32 +103,7 @@ public class RegisActivity extends AppCompatActivity {
                 CustomIntent.customType(RegisActivity.this,"right-to-left");
             }
         });
-        NgaySinhText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(
-                        RegisActivity.this,
-                        android.R.style.Theme_Holo_Dialog_NoActionBar_MinWidth,birthdayListener,
-                        year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-        birthdayListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                month = month + 1;
-
-
-                String date = day +"/"+month+"/"+year;
-                NgaySinhText.setText(date);
-            }
-        };
         RegButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -260,7 +235,7 @@ public class RegisActivity extends AppCompatActivity {
          username = TaiKhoanText.getText().toString().trim();
          mobile = SdtText.getText().toString().trim();
         password = MatKhauText.getText().toString().trim();
-         DateOfBirth = NgaySinhText.getText().toString();
+         //DateOfBirth = NgaySinhText.getText().toString();
         reEnterPassword = XacNhanText.getText().toString().trim();
         DiaChi=DiaChiText.getText().toString();
         MoTa=MoTaText.getText().toString();
@@ -281,16 +256,7 @@ public class RegisActivity extends AppCompatActivity {
             TaiKhoanText.setError(null);
         }
 
-        if(DateOfBirth.isEmpty())
-        {
-            NgaySinhText.setError("Vui lòng nhập ngày sinh");
-            valid = false;
-        }else
-        {
-            temp=DateOfBirth.split("/");
-            myDateOfBirth=temp[2]+"/"+temp[1]+"/"+temp[0];
-            NgaySinhText.setError(null);
-        }
+
 
         if(mobile.isEmpty())
         {
@@ -323,7 +289,7 @@ public class RegisActivity extends AppCompatActivity {
 
     private void AnhXa() {
         TaiKhoanText=findViewById(R.id.taikhoanText);
-        NgaySinhText=findViewById(R.id.NgaySinhText);
+
         SdtText=findViewById(R.id.sdtText);
         HoTenText=findViewById(R.id.HoTennText);
         MatKhauText=findViewById(R.id.matkahuText);

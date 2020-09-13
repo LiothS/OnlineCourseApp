@@ -94,6 +94,7 @@ public class OwnLessonActivity extends AppCompatActivity {
                 startActivityForResult(intent,3002);
             }
         });
+        deleteBtn.setVisibility(View.GONE);
     }
 
     @Override
@@ -154,7 +155,7 @@ public class OwnLessonActivity extends AppCompatActivity {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
-        iMyService.updateLessonInfo("http://52.152.163.79:9000/lesson/update-lesson/"+lesson.getID(),lesson.getIdcourse(),lessonOrder.getText().toString(), lessonTitle.getText().toString(),
+        iMyService.updateLessonInfo("http://13.68.245.234:9000/lesson/update-lesson/"+lesson.getID(),lesson.getIdcourse(),lessonOrder.getText().toString(), lessonTitle.getText().toString(),
                 sharedPreferences.getString("token",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

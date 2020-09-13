@@ -66,33 +66,7 @@
 
                     />
             </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
 
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:textColorHint="#ffff"
-                android:theme="@style/EditTextStyle"
-                android:id="@+id/nsLayout"
-                android:hint="Ngày sinh"
-                app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/birth"
-                    android:textColorHint="@color/white"
-                    android:textColor="@color/white"
-                    android:drawableRight="@drawable/birth"
-
-                    android:id="@+id/NgaySinhText"
-                    android:padding="10dp"
-                    android:clickable="true"
-                    android:focusable="false"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -110,9 +84,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:drawableEnd="@drawable/ic_local_phone_black_24dp"
+                    android:drawableEnd="@drawable/ic_local_phone_white"
                     android:id="@+id/sdtText"
-                    android:drawableRight="@drawable/ic_local_phone_black_24dp"
+                    android:drawableRight="@drawable/ic_local_phone_white"
 
                     android:padding="10dp"
 

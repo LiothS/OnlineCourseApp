@@ -34,6 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -51,6 +52,7 @@ public class DoingTestActivity extends AppCompatActivity {
     Lesson lesson;
     ArrayList<MultiChoice> multiChoiceArrayList=new ArrayList<>();
     QuizAdapter quizAdapter;
+    TextView tvtemp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +60,7 @@ public class DoingTestActivity extends AppCompatActivity {
         toolbar=findViewById(R.id.doingTestTB);
         recyclerView=findViewById(R.id.quizTestRV);
         submitBtn=findViewById(R.id.submitBtn);
+        tvtemp=findViewById(R.id.temp);
         ActionToolBar();
         lesson= (Lesson) getIntent().getSerializableExtra("lesson");
 
@@ -90,7 +93,7 @@ public class DoingTestActivity extends AppCompatActivity {
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
 
-        iMyService.getListComment("http://52.152.163.79:9000/lesson/get-multiple-choice-for-test/"+lesson.getID()).
+        iMyService.getListComment("http://13.68.245.234:9000/lesson/get-multiple-choice-for-test/"+lesson.getID()).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -251,8 +254,44 @@ public class DoingTestActivity extends AppCompatActivity {
 
                         if(flag==true)
                         {
-                            TextView tv=findViewById(R.id.temp);
-                            tv.setText(temp);
+                            try {
+                                JSONObject jsonObject=new JSONObject(temp);
+                                int right=jsonObject.getInt("totalRight");
+                                int wrong=jsonObject.getInt("totalWrong");
+                                AlertDialog.Builder  mbuilder=new AlertDialog.Builder(DoingTestActivity.this);
+                                View view=getLayoutInflater().inflate(R.layout.quiz_result,null);
+                                TextView totalright, totalquestion;
+                                Button doAgain, cancleTest;
+                                totalright=view.findViewById(R.id.totalRight);
+                                totalquestion=view.findViewById(R.id.totalQuestion);
+                                doAgain=view.findViewById(R.id.doAgain);
+                                cancleTest=view.findViewById(R.id.cancelTest);
+                                int total=right+wrong;
+                                totalright.setText(""+right);
+                                totalquestion.setText("/"+total);
+                                mbuilder.setView(view);
+                                AlertDialog alertDialog=mbuilder.create();
+                                alertDialog.setCancelable(false);
+                                doAgain.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        alertDialog.dismiss();
+
+                                    }
+                                });
+                                cancleTest.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        finish();
+                                    }
+                                });
+                                alertDialog.show();
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
 
                         }
                         else

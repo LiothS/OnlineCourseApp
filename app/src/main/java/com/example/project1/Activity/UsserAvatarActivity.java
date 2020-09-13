@@ -38,6 +38,7 @@ import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -68,7 +69,7 @@ public class UsserAvatarActivity extends AppCompatActivity {
         Retrofit retrofitClient= RetrofitClient.getInstance();
         iMyService=retrofitClient.create(IMyService.class);
         userAccount= (UserAccount) getIntent().getSerializableExtra("userAcc");
-        String avurl="http://52.152.163.79:9000/upload/user_image/";
+        String avurl="http://13.68.245.234:9000/upload/user_image/";
         Picasso.get().load(avurl+userAccount.getAva()).placeholder(R.drawable.useravatar).error(R.drawable.useravatar).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(circleImageView);
         ChonAnhThuVien.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,7 +198,8 @@ public class UsserAvatarActivity extends AppCompatActivity {
                                 }, 500);
 
                         if(flag==true)
-                        { Toast.makeText(UsserAvatarActivity.this, "Cập nhật ảnh thành công", Toast.LENGTH_SHORT).show();
+                        {
+                            Toasty.success(UsserAvatarActivity.this, "Cập nhật ảnh thành công", Toast.LENGTH_SHORT).show();
                             final Intent data = new Intent();
 
                             data.putExtra("usernewAcc", userAccount);

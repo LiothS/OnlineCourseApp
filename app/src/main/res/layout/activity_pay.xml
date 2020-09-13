@@ -24,6 +24,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:hint="Email"
         android:layout_margin="20dp">
         <com.google.android.material.textfield.TextInputEditText
@@ -37,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Họ tên"
+        android:visibility="gone"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
         <com.google.android.material.textfield.TextInputEditText
@@ -45,6 +47,7 @@
             android:id="@+id/payName"
             />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.stripe.android.view.CardInputWidget
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -2,7 +2,10 @@ package com.example.project1.Activity;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,11 +16,15 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project1.Adapter.RatingCommentAdapter;
+import com.example.project1.Adapter.topCourseAdapter;
+import com.example.project1.Model.RatingComment;
 import com.example.project1.Model.courseItem;
 import com.example.project1.R;
 import com.example.project1.Retrofit.IMyService;
@@ -32,16 +39,21 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import maes.tech.intentanim.CustomIntent;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static android.nfc.NfcAdapter.EXTRA_DATA;
 import static android.view.View.GONE;
 
 public class CourseDetail extends AppCompatActivity {
@@ -56,10 +68,18 @@ public class CourseDetail extends AppCompatActivity {
     courseItem courseItem;
     IMyService iMyService;
     AlertDialog alertDialog;
+    RecyclerView recyclerView1;
+    ArrayList<courseItem> courseItems = new ArrayList<>();
+    com.example.project1.Adapter.topCourseAdapter topCourseAdapter;
     boolean flag=false;
     SharedPreferences sharedPreferences;
     JSONArray cartArray=new JSONArray();
     boolean checkCart=false;
+    String cmtContent="";
+    float numstar;
+    RecyclerView recyclerView;
+    RatingCommentAdapter ratingCommentAdapter;
+    ArrayList<RatingComment> item=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +87,20 @@ public class CourseDetail extends AppCompatActivity {
         AnhXa();
         courseItem= (com.example.project1.Model.courseItem) getIntent().getSerializableExtra("course");
         setUp();
+        recyclerView=findViewById(R.id.courseComment);
+        ratingCommentAdapter=new RatingCommentAdapter(item,this);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(ratingCommentAdapter);
+        topCourseAdapter = new topCourseAdapter(courseItems,this);
+        topCourseAdapter.setHasStableIds(true);
+        recyclerView1 = findViewById(R.id.recommendCourses);
+        recyclerView1.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false));
+        recyclerView1.setAdapter(topCourseAdapter);
+
+        getRecommendCourses();
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        if(courseItem.getPrice()>0) CheckIsBought();
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         Retrofit retrofitClient= RetrofitClient.getInstance();
         iMyService=retrofitClient.create(IMyService.class);
@@ -94,7 +127,7 @@ public class CourseDetail extends AppCompatActivity {
             public void onClick(View v) {
                 String stringFromJSONArray=cartArray.toString();
                 if(stringFromJSONArray.contains(courseItem.getID()))
-                    Toast.makeText(CourseDetail.this, "Khóa học đã có sẵn trong giỏ hàng !", Toast.LENGTH_SHORT).show();
+                    Toasty.warning(CourseDetail.this, "Khóa học đã có sẵn trong giỏ hàng !", Toast.LENGTH_SHORT).show();
                 else {
                     JSONObject jo = new JSONObject();
                     try {
@@ -112,13 +145,367 @@ public class CourseDetail extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("cartArray", cartArray.toString());
                     editor.apply();
-                    Toast.makeText(CourseDetail.this, "Thành công", Toast.LENGTH_SHORT).show();
+                    Toasty.success(CourseDetail.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                 }
                 addToCart.setEnabled(false);
 
             }
 
         });
+        writeComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder  mbuilder=new AlertDialog.Builder(CourseDetail.this);
+                View view=getLayoutInflater().inflate(R.layout.create_rate_dialog,null);
+                RatingBar dialogRatingBar=view.findViewById(R.id.courseRatingBar);
+                EditText cmtContentEditText=view.findViewById(R.id.courseComment);
+                Button sendBtn=view.findViewById(R.id.sendRating);
+                mbuilder.setView(view);
+                AlertDialog alertDialog=mbuilder.create();
+                sendBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        numstar=dialogRatingBar.getRating();
+                        cmtContent=cmtContentEditText.getText().toString();
+                        PostRating();
+                        item.clear();
+                        ratingCommentAdapter.notifyDataSetChanged();
+                        alertDialog.dismiss();
+                        GetRating();
+
+
+                    }
+                });
+
+
+                alertDialog.show();
+            }
+        });
+        GetRating();
+
+    }
+    boolean flagBought=false;
+    boolean checkBought=false;
+    private void CheckIsBought(){
+        IMyService iMyService;
+        AlertDialog alertDialog;
+
+
+        Retrofit retrofitClient= RetrofitClient.getInstance();
+        iMyService=retrofitClient.create(IMyService.class);
+        alertDialog= new SpotsDialog.Builder().setContext(this).build();
+        alertDialog.show();
+        iMyService.getListComment("http://13.68.245.234:9000/course/check-is-bough-this-course/"+courseItem.getID()+"/"+sharedPreferences.getString("id",null)).
+                subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>(){
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onNext(String response) {
+
+
+                        try {
+                            JSONObject jsonObject=new JSONObject(response);
+                            checkBought=jsonObject.getBoolean("bought");
+                            flagBought=true;
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        alertDialog.dismiss();
+
+                                    }
+                                }, 500);
+                        Toast.makeText(CourseDetail.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        alertDialog.dismiss();
+
+                                    }
+                                }, 500);
+
+                        if(flagBought==true)
+                        {
+                                if(checkBought==true) addToCart.setVisibility(GONE);
+
+                        }
+                        else{}
+                        //Toast.makeText(CourseDetail.this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+    };
+    boolean flag3=false;
+    private void getRecommendCourses() {
+        IMyService iMyService;
+        AlertDialog alertDialog;
+        Retrofit retrofitClient= RetrofitClient.getInstance();
+        iMyService=retrofitClient.create(IMyService.class);
+        alertDialog= new SpotsDialog.Builder().setContext(this).build();
+        alertDialog.show();
+        iMyService.getListComment("http://13.68.245.234:9000/course/recommend-course/"+courseItem.getID()).
+                subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>(){
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onNext(String response) {
+
+
+
+                        try {
+
+                            String temp=response;
+
+                            //JSONObject jsonObject=new JSONObject(temp);
+
+                            JSONArray ja=new JSONArray(response);
+                            // JSONArray jsonArray=jsonObject.getJSONArray("");
+                            for(int i=0;i<ja.length();i++)
+                            {
+                                JSONObject jo=ja.getJSONObject(i);
+
+                                courseItems.add(new courseItem( "http://13.68.245.234:9000/upload/course_image/"+jo.getString("image"),
+                                        jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
+                                        Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
+                                        Float.valueOf(jo.getString("price")),
+                                        Float.valueOf(jo.getString("discount")),
+                                        Float.valueOf(jo.getJSONObject("vote").getString("totalVote")),jo.getString("goal"),jo.getString("description"),jo.getString("_id"),
+                                       "",
+                                        jo.getString("category"),
+                                        jo.getString("ranking"),
+                                        jo.getString("created_at")));
+                                topCourseAdapter.notifyDataSetChanged();
+
+                                // if(i==7) Toast.makeText(getContext(), jo.getString("image"), Toast.LENGTH_LONG).show();
+
+
+                            }
+                            flag3=true;
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(CourseDetail.this, e.toString(), Toast.LENGTH_LONG).show();
+                        }
+
+
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        alertDialog.dismiss();
+
+                                    }
+                                }, 500);
+                        Toast.makeText(CourseDetail.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        alertDialog.dismiss();
+
+                                    }
+                                }, 500);
+
+                        if(flag3==true)
+                        {
+
+
+                        }
+                        else{}
+                            //Toast.makeText(CourseDetail.this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
+
+    float result=0;
+    String temp="";
+    private void PostRating() {
+        SharedPreferences sharedPreferences;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(CourseDetail.this);
+        JSONObject jo=new JSONObject();
+        try {
+            jo.put("idUser",sharedPreferences.getString("id",null));
+            jo.put("idCourse",courseItem.getID());
+            jo.put("content",cmtContent);
+            jo.put("numStar",numstar);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        IMyService iMyService;
+        AlertDialog alertDialog;
+        Retrofit retrofitClient= RetrofitClient.getInstance();
+        iMyService=retrofitClient.create(IMyService.class);
+        alertDialog= new SpotsDialog.Builder().setContext(this).build();
+        alertDialog.show();
+        RequestBody body = RequestBody.create(MediaType.parse("application/json"), jo.toString());
+        iMyService.postRating(body).
+                subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>(){
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onNext(String response) {
+
+
+                        flag=true;
+                        temp=response;
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        alertDialog.dismiss();
+
+                                    }
+                                }, 500);
+                        Toasty.error(CourseDetail.this, "Bạn chưa hoàn thành 80% khóa học", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        alertDialog.dismiss();
+
+                                    }
+                                }, 500);
+
+                        if(flag==true)
+                        {
+
+
+                            Toasty.success(CourseDetail.this, "Gửi thành công", Toast.LENGTH_SHORT).show();
+
+
+                        }
+                        else
+                            Toast.makeText(CourseDetail.this, "Lỗi", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+    }
+
+    private void GetRating() {
+        IMyService iMyService;
+        AlertDialog alertDialog;
+        Retrofit retrofitClient= RetrofitClient.getInstance();
+        iMyService=retrofitClient.create(IMyService.class);
+        alertDialog= new SpotsDialog.Builder().setContext(this).build();
+
+
+        iMyService.getListComment("http://13.68.245.234:9000/rate/get-rate-by-course/"+courseItem.getID()).
+                subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>(){
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onNext(String response) {
+
+
+                        flag=true;
+                        temp=response;
+                        try {
+                            JSONArray jsonArray=new JSONArray(temp);
+                            for(int i=0;i<jsonArray.length();i++){
+                                JSONObject jo1=jsonArray.getJSONObject(i);
+                                JSONObject jo2=jo1.getJSONObject("idUser");
+                                String name=jo2.getString("name");
+                                String url=jo2.getString("image");
+                                String content=jo1.getString("content");
+                                double rating=jo1.getDouble("numStar");
+                                RatingComment ratingComment=new RatingComment(name,content,(float)rating,"http://13.68.245.234:9000/upload/user_image/"+url);
+                                item.add(ratingComment);
+                                result=result+(float)rating;
+                                ratingCommentAdapter.notifyDataSetChanged();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                       // Toasty.error(CourseDetail.this, "Bạn chưa hoàn thành 80% khóa học", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+
+                        if(flag==true)
+                        {
+                            result=result/item.size();
+                           // Toasty.success(CourseDetail.this, "Gửi thành công", Toast.LENGTH_SHORT).show();
+
+
+                        }
+
+                           // Toast.makeText(CourseDetail.this, "Lỗi", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
 
     }
 
@@ -234,9 +621,7 @@ public class CourseDetail extends AppCompatActivity {
         coursePrice=findViewById(R.id.ccoursePrice);
         courseOldPrice=findViewById(R.id.courseOldPrice);
         courseJoinBtn=findViewById(R.id.joinCourse);
-        videoCount=findViewById(R.id.videoNumber);
-        fileCount=findViewById(R.id.fileNumber);
-        quizCount=findViewById(R.id.quizNumber);
+
         courseDescription=findViewById(R.id.authorsDescription);
         totalVote=findViewById(R.id.totalVoteRating);
         addToCart=findViewById(R.id.addToCart);

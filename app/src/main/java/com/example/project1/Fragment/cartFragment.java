@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +28,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import maes.tech.intentanim.CustomIntent;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class cartFragment extends Fragment {
@@ -64,12 +67,30 @@ public class cartFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(), PayActivity.class);
 
-                startActivityForResult(intent,1);
+                startActivityForResult(intent,1111);
                 CustomIntent.customType(getContext(),"left-to-right");
             }
         });
 
         return  rootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK&&requestCode==1111)
+        {
+            if(data.getBooleanExtra("isPaid",false)){
+                recyclerView.setVisibility(View.GONE);
+                SharedPreferences sharedPreferences;
+                sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove(("cartArray"));
+                editor.commit();
+            }
+
+        }
+
     }
 
     private void LoadCourseInCart() {
@@ -79,7 +100,7 @@ public class cartFragment extends Fragment {
         try {
            // Toast.makeText(getContext(), "here", Toast.LENGTH_SHORT).show();
             cartArray= new JSONArray(sharedPreferences.getString("cartArray", "[]"));
-
+            if(cartArray.length()==0) {payBtn.setText("Vỏ hàng rỗng");payBtn.setEnabled(false);}
             for(int i=0;i<cartArray.length();i++){
                 JSONObject jo=cartArray.getJSONObject(i);
                 courseItems.add(new courseItem(jo.getString("courseImage"),jo.getString("title"),jo.getString("author"),jo.getString("courseID"),

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    >
+   <LinearLayout
+       android:layout_width="match_parent"
+        android:orientation="vertical"
+       android:layout_height="match_parent">
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Kết quả"
+           android:layout_marginTop="20dp"
+           android:textColor="#000"
+           android:textSize="20dp"
+           android:fontFamily="@font/open_sans_semibold"
+           android:layout_gravity="center_horizontal"
+           />
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="20dp"
+           android:layout_gravity="center_horizontal"
+           android:orientation="horizontal">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="25dp"
+               android:text="100"
+               android:id="@+id/totalRight"
+               android:fontFamily="@font/open_sans_semibold"
+               android:textColor="#B17D30"
+
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="25dp"
+               android:id="@+id/totalQuestion"
+               android:layout_marginLeft="2dp"
+               android:text="/100"
+               android:fontFamily="@font/open_sans_semibold"
+               android:textColor="#000"
+
+               />
+       </LinearLayout>
+       <LinearLayout
+           android:layout_marginTop="20dp"
+           android:layout_marginBottom="20dp"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center_horizontal"
+           android:orientation="horizontal"
+           >
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Làm lại"
+               android:textSize="10dp"
+               android:padding="5dp"
+               android:id="@+id/doAgain"
+               android:textColor="#fff"
+               android:background="@drawable/do_again_border"
+               />
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_marginLeft="20dp"
+               android:textSize="10dp"
+               android:padding="5dp"
+               android:layout_height="wrap_content"
+               android:text="Kết thúc"
+               android:textColor="#fff"
+               android:id="@+id/cancelTest"
+               android:background="@drawable/cancle_btn"
+               />
+
+       </LinearLayout>
+   </LinearLayout>
+</androidx.cardview.widget.CardView>

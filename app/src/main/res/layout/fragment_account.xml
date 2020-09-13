@@ -152,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="Phương thức thanh toán"
+                android:text="Lịch sử thanh toán"
                 android:layout_gravity="center"
                 android:textColor="#000"
                 android:layout_marginLeft="20dp"

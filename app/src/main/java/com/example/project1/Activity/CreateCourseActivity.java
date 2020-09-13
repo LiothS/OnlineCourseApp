@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dmax.dialog.SpotsDialog;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -210,7 +211,7 @@ public class CreateCourseActivity extends AppCompatActivity {
 
                         if(flag==true)
                         {
-                            Toast.makeText(CreateCourseActivity.this, "Tạo thành công", Toast.LENGTH_SHORT).show();
+                           Toasty.success(CreateCourseActivity.this, "Tạo thành công", Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(CreateCourseActivity.this,HomeActivity.class);
                             startActivity(intent);
                             CustomIntent.customType(CreateCourseActivity.this, "left-to-right");

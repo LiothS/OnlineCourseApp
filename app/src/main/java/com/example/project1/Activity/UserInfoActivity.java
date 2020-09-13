@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import dmax.dialog.SpotsDialog;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -144,7 +145,7 @@ public class UserInfoActivity extends AppCompatActivity {
                                 }, 500);
 
                         if(flag==true)
-                        { Toast.makeText(UserInfoActivity.this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                        { Toasty.success(UserInfoActivity.this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
                             final Intent data = new Intent();
 
                             data.putExtra("usernewAcc", userAccount);

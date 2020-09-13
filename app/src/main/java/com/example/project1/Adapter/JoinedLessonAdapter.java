@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -37,8 +38,10 @@ public class JoinedLessonAdapter extends RecyclerView.Adapter<JoinedLessonAdapte
     @Override
     public void onBindViewHolder(@NonNull JoinedLessonAdapter.CustomViewHolder holder, int position) {
         //holder.textView1.setText(items.get(position).getOrder());
-        holder.textView2.setText("Bài "+ items.get(position).getOrder()+"- "+items.get(position).getTitle());
-        String info="";
+        holder.textView2.setText(items.get(position).getTitle());
+        holder.textView1.setText(String.valueOf(position +1));
+        if(items.get(position).isComplete()){ holder.textview3.setText("Hoàn thành");holder.imageView.setVisibility(View.VISIBLE);}
+        if(!items.get(position).isComplete()) holder.imageView.setVisibility(View.GONE);
 
 
 
@@ -54,17 +57,20 @@ public class JoinedLessonAdapter extends RecyclerView.Adapter<JoinedLessonAdapte
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textView1,textView2, textview3;
+        private ImageView imageView;
         public CustomViewHolder(View view) {
             super(view);
-
+            imageView=view.findViewById(R.id.completeIcon);
             textView2=view.findViewById(R.id.joinedLessonTitle);
-            ProgressBar progressBar=view.findViewById(R.id.circularProgressbar);
+            textView1=view.findViewById(R.id.joinedLessonOrder);
+            textview3=view.findViewById(R.id.checkCompleted);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent(context, LessonDetailActivity.class);
                     intent.putExtra("lesson",items.get(getAdapterPosition()));
                     ((Activity) context).startActivityForResult(intent,1900);
+
                 }
             });
         }

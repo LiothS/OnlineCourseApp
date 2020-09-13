@@ -125,7 +125,7 @@ public class LessonFileActivity extends AppCompatActivity {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
-        iMyService.addLessonFile("http://52.152.163.79:9000/lesson/add-docs/"+lesson.getID(),part,sharedPreferences.getString("token",null)).
+        iMyService.addLessonFile("http://13.68.245.234:9000/lesson/add-docs/"+lesson.getID(),part,sharedPreferences.getString("token",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){

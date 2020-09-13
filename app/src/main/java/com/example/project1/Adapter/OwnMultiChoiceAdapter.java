@@ -26,6 +26,7 @@ import com.example.project1.Retrofit.RetrofitClient;
 import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -62,7 +63,9 @@ public class OwnMultiChoiceAdapter extends RecyclerView.Adapter<OwnMultiChoiceAd
                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                              if(items.get(position).getTimeShow().isEmpty())
                                 RemoveItem(position);
+                              else RemoveItem2(position);
 
                             }
                         }).setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -78,6 +81,79 @@ public class OwnMultiChoiceAdapter extends RecyclerView.Adapter<OwnMultiChoiceAd
 
 
     }
+
+    private void RemoveItem2(int position) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        IMyService iMyService;
+        AlertDialog alertDialog;
+        Retrofit retrofitClient= RetrofitClient.getInstance();
+        iMyService=retrofitClient.create(IMyService.class);
+        alertDialog= new SpotsDialog.Builder().setContext(context).build();
+        alertDialog.show();
+        iMyService.deleteFile("http://13.68.245.234:9000/lesson/delete-a-popup-question/"+LessonID+"/"+items.get(position).getId(), sharedPreferences.getString("token",null)).
+                subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>(){
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onNext(String response) {
+
+                        flag = true;
+
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        alertDialog.dismiss();
+
+                                    }
+                                }, 500);
+                        //Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        flag=true;
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        alertDialog.dismiss();
+
+                                    }
+                                }, 500);
+
+                        if(flag==true)
+                        {
+                            Toasty.success(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+
+
+
+
+
+                        }
+                        else
+                            Toast.makeText(context, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+        items.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, items.size());
+    }
+
     boolean flag=false;
     private void RemoveItem(int position) {
 
@@ -88,7 +164,7 @@ public class OwnMultiChoiceAdapter extends RecyclerView.Adapter<OwnMultiChoiceAd
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(context).build();
         alertDialog.show();
-        iMyService.deleteFile("http://52.152.163.79:9000/lesson/delete-a-multiple-choice/"+LessonID+"/"+items.get(position).getId(), sharedPreferences.getString("token",null)).
+        iMyService.deleteFile("http://13.68.245.234:9000/lesson/delete-a-multiple-choice/"+LessonID+"/"+items.get(position).getId(), sharedPreferences.getString("token",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -134,7 +210,7 @@ public class OwnMultiChoiceAdapter extends RecyclerView.Adapter<OwnMultiChoiceAd
 
                         if(flag==true)
                         {
-                            Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                            Toasty.success(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
 
 
 

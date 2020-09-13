@@ -9,6 +9,15 @@ public class courseItem implements Serializable {
     private String author;
     private String authorID;
     private String goal;
+    private int percent;
+
+    public int getPercent() {
+        return percent;
+    }
+
+    public void setPercent(int percent) {
+        this.percent = percent;
+    }
 
     public courseItem() {
     }
@@ -20,6 +29,15 @@ public class courseItem implements Serializable {
         this.ID = ID;
         this.price=price;
         this.discount=discount;
+    }
+    private String createAt;
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
     }
 
     private String desription;

@@ -105,22 +105,9 @@ public class LessonChoicesActivity extends AppCompatActivity {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
-        UploadImage();
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        int j=0;
-                        for(int i=0;i<sendMultiChoiceArrayList.size();i++){
-                            if(sendMultiChoiceArrayList.get(i).getFile()!=null)
-                            {sendMultiChoiceArrayList.get(i).setImage(imageNames.get(j));
-                                j++;
-                            }
-                        }
 
-
-                    }
-                }, 5000);
         JSONArray jsonArray=new JSONArray();
+       // Toast.makeText(this, sendMultiChoiceArrayList.get(0).getImage(), Toast.LENGTH_SHORT).show();
         for(int i=0;i<sendMultiChoiceArrayList.size();i++)
         {
             JSONObject jo=new JSONObject();
@@ -131,7 +118,7 @@ public class LessonChoicesActivity extends AppCompatActivity {
                 jo.put("D",multiChoiceArrayList.get(i).getD());
                 jo.put("answer",multiChoiceArrayList.get(i).getAnswer());
                 jo.put("question",multiChoiceArrayList.get(i).getQuestion());
-                if(multiChoiceArrayList.get(i).getImage()!=null)
+                if(multiChoiceArrayList.get(i).getImage().isEmpty()==false)
                 jo.put("image",multiChoiceArrayList.get(i).getImage());
                 jo.put("timeShow",multiChoiceArrayList.get(i).getTimeShow());
             } catch (JSONException e) {
@@ -151,7 +138,7 @@ public class LessonChoicesActivity extends AppCompatActivity {
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json"), sendJo.toString());
 
-        iMyService. updateMultipleChoice("http://52.152.163.79:9000/lesson/add-list-popup-question/"+lesson.getID(),body,sharedPreferences.getString("token",null)).
+        iMyService. updateMultipleChoice("http://13.68.245.234:9000/lesson/add-list-popup-question/"+lesson.getID(),body,sharedPreferences.getString("token",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){

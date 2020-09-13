@@ -1,7 +1,6 @@
 package com.example.project1.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.preference.PreferenceManager;
@@ -9,14 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project1.Activity.CourseDetail;
 import com.example.project1.Model.courseItem;
 import com.example.project1.R;
 import com.squareup.picasso.MemoryPolicy;
@@ -51,7 +47,7 @@ public class CartCourseAdapter extends RecyclerView.Adapter<CartCourseAdapter.Cu
     public void onBindViewHolder(@NonNull CartCourseAdapter.CustomViewHolder holder, int position) {
         holder.title.setText(items.get(position).getTitle());
         holder.author.setText("Tác giả: "+items.get(position).getAuthor());
-        Picasso.get().load(items.get(position).getUrl()).placeholder(R.drawable.empty2).error(R.drawable.empty2).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.imageView);
+        Picasso.get().load(items.get(position).getUrl()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.imageView);
         NumberFormat formatter = new DecimalFormat("#,###");
         double price=(double)items.get(position).getPrice();
         String formattedNumber1 = formatter.format(price);

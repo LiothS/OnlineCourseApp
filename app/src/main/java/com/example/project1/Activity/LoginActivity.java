@@ -194,6 +194,7 @@ public class LoginActivity extends AppCompatActivity {
                             intent.putExtra("change",0);
                             startActivity(intent);
                             CustomIntent.customType(LoginActivity.this, "right-to-left");
+
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();

@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import dmax.dialog.SpotsDialog;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -137,7 +138,7 @@ public class UserPasswordActivity extends AppCompatActivity {
                                 }, 500);
 
                         if(flag==true)
-                        { Toast.makeText(UserPasswordActivity.this, "Cập nhật mật khẩu thành công", Toast.LENGTH_SHORT).show();
+                        { Toasty.success(UserPasswordActivity.this, "Cập nhật mật khẩu thành công", Toast.LENGTH_SHORT).show();
                             final Intent data = new Intent();
 
                             // Truyền data vào intent

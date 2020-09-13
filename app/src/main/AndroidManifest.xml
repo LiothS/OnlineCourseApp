@@ -7,6 +7,7 @@
     <dist:module dist:instant="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.intent.action.MULTIPLE_PICK" />
@@ -20,9 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.PayActivity">
-
-        </activity>
+        <activity android:name=".Activity.SearchResultActivity"></activity>
+        <activity android:name=".Activity.PayActivity"></activity>
         <activity android:name=".Activity.DoingTestActivity" />
         <activity android:name=".Activity.AddTestQuizActivity" />
         <activity android:name=".Activity.LessonTestActivity" />

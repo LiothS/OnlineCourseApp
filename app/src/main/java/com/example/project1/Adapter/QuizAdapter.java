@@ -2,39 +2,22 @@ package com.example.project1.Adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project1.Activity.LessonDetailActivity;
 import com.example.project1.Model.MultiChoice;
 import com.example.project1.R;
-import com.example.project1.Retrofit.IMyService;
-import com.example.project1.Retrofit.RetrofitClient;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
-import dmax.dialog.SpotsDialog;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.CustomViewHolder> {
     private ArrayList<MultiChoice> items;
@@ -99,7 +82,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.CustomViewHold
 
                 if(items.get(getAdapterPosition()).getImage().contains("."))
                 {
-                    Picasso.get().load("http://52.152.163.79:9000/upload/lesson/"+items.get(getAdapterPosition()).getImage()).placeholder(R.drawable.empty2).error(R.drawable.empty2).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(imgView);
+                    Picasso.get().load("http://13.68.245.234:9000/upload/lesson/"+items.get(getAdapterPosition()).getImage()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(imgView);
                     imgView.setVisibility(View.VISIBLE);
                 }
                 ansA.setOnClickListener(new View.OnClickListener() {

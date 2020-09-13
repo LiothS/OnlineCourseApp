@@ -7,14 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project1.Activity.CourseByCategory;
-import com.example.project1.Activity.CreateCourseActivity;
-import com.example.project1.Activity.UserInfoActivity;
 import com.example.project1.Model.category_item;
 import com.example.project1.R;
 import com.squareup.picasso.MemoryPolicy;
@@ -41,7 +38,7 @@ public class categoryRVAdapter extends RecyclerView.Adapter<categoryRVAdapter.Cu
     @Override
     public void onBindViewHolder(@NonNull categoryRVAdapter.CustomViewHolder holder, int position) {
         holder.textView.setText(items.get(position).getname().toUpperCase());
-        Picasso.get().load(items.get(position).getImg()).placeholder(R.drawable.empty2).error(R.drawable.empty2).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.img);
+        Picasso.get().load(items.get(position).getImg()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.img);
 
 
     }

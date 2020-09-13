@@ -33,6 +33,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -55,6 +56,7 @@ public class LessonTestActivity extends AppCompatActivity {
 
     boolean flag=false, flagAdd=false;
     SharedPreferences sharedPreferences;
+
     ArrayList<MultiChoice> multiChoiceArrayList=new ArrayList<>();
     ArrayList<MultiChoice> sendMultiChoiceArrayList=new ArrayList<>();
     ArrayList<File> files=new ArrayList<>();
@@ -84,9 +86,10 @@ public class LessonTestActivity extends AppCompatActivity {
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(flagAdd==false)
-                    Toast.makeText(LessonTestActivity.this, "Không có gì để cập nhật", Toast.LENGTH_SHORT).show();
-                else Update();
+                if(multiChoiceArrayList.size()>0)
+                 Update();
+
+                else Toasty.error(LessonTestActivity.this,"Không có gì để cập nhật").show();
 
             }
         });
@@ -100,21 +103,8 @@ public class LessonTestActivity extends AppCompatActivity {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
-        UploadImage();
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        int j=0;
-                        for(int i=0;i<sendMultiChoiceArrayList.size();i++){
-                            if(sendMultiChoiceArrayList.get(i).getFile()!=null)
-                            {sendMultiChoiceArrayList.get(i).setImage(imageNames.get(j));
-                                j++;
-                            }
-                        }
 
 
-                    }
-                }, 5000);
         JSONArray jsonArray=new JSONArray();
         for(int i=0;i<multiChoiceArrayList.size();i++)
         {
@@ -126,7 +116,8 @@ public class LessonTestActivity extends AppCompatActivity {
                 jo.put("D",multiChoiceArrayList.get(i).getD());
                 jo.put("answer",multiChoiceArrayList.get(i).getAnswer());
                 jo.put("question",multiChoiceArrayList.get(i).getQuestion());
-                if(multiChoiceArrayList.get(i).getImage()!=null)
+               // Toast.makeText(this,multiChoiceArrayList.get(i).getImage() , Toast.LENGTH_SHORT).show();
+                if(multiChoiceArrayList.get(i).getImage().isEmpty()==false)
                     jo.put("image",multiChoiceArrayList.get(i).getImage());
 
             } catch (JSONException e) {
@@ -146,7 +137,7 @@ public class LessonTestActivity extends AppCompatActivity {
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json"), sendJo.toString());
 
-        iMyService. updateMultipleChoice("http://52.152.163.79:9000/lesson/add-list-multiple-choice/"+lesson.getID(),body,sharedPreferences.getString("token",null)).
+        iMyService. updateMultipleChoice("http://13.68.245.234:9000/lesson/add-list-multiple-choice/"+lesson.getID(),body,sharedPreferences.getString("token",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -161,6 +152,7 @@ public class LessonTestActivity extends AppCompatActivity {
 
 
                         flag=true;
+
 
 
                     }
@@ -191,7 +183,7 @@ public class LessonTestActivity extends AppCompatActivity {
 
                         if(flag==true)
                         {
-                            Toast.makeText(LessonTestActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                            Toasty.success(LessonTestActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                             final Intent data = new Intent();
                             data.putExtra(EXTRA_DATA, "success");
                             data.putExtra("lesson",lesson);
@@ -216,7 +208,7 @@ public class LessonTestActivity extends AppCompatActivity {
         Retrofit retrofitClient= RetrofitClient.getInstance();
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
-        Toast.makeText(this, ""+files.size(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, ""+files.size(), Toast.LENGTH_SHORT).show();
         for( int i=0;i<sendMultiChoiceArrayList.size();i++)
         {
             if(sendMultiChoiceArrayList.get(i).getFile()!=null){
