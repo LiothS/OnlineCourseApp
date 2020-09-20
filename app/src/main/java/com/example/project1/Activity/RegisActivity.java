@@ -72,7 +72,7 @@ public class RegisActivity extends AppCompatActivity {
     String mobile = "";
     String password = "";
     String DateOfBirth ="";
-    public static final String URL = "http://13.68.245.234:9000/register";
+    public static final String URL = "http://149.28.24.98:9000/register";
     String reEnterPassword = "";
     String DiaChi="",MoTa="",GioiTinh="",token="";
     UserAccount userAccount;

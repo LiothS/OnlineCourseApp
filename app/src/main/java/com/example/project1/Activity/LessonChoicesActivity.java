@@ -138,7 +138,7 @@ public class LessonChoicesActivity extends AppCompatActivity {
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json"), sendJo.toString());
 
-        iMyService. updateMultipleChoice("http://13.68.245.234:9000/lesson/add-list-popup-question/"+lesson.getID(),body,sharedPreferences.getString("token",null)).
+        iMyService. updateMultipleChoice("http://149.28.24.98:9000/lesson/add-list-popup-question/"+lesson.getID(),body,sharedPreferences.getString("token",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){

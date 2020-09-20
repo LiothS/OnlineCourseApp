@@ -90,7 +90,7 @@ public class OwnMultiChoiceAdapter extends RecyclerView.Adapter<OwnMultiChoiceAd
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(context).build();
         alertDialog.show();
-        iMyService.deleteFile("http://13.68.245.234:9000/lesson/delete-a-popup-question/"+LessonID+"/"+items.get(position).getId(), sharedPreferences.getString("token",null)).
+        iMyService.deleteFile("http://149.28.24.98:9000/lesson/delete-a-popup-question/"+LessonID+"/"+items.get(position).getId(), sharedPreferences.getString("token",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -164,7 +164,7 @@ public class OwnMultiChoiceAdapter extends RecyclerView.Adapter<OwnMultiChoiceAd
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(context).build();
         alertDialog.show();
-        iMyService.deleteFile("http://13.68.245.234:9000/lesson/delete-a-multiple-choice/"+LessonID+"/"+items.get(position).getId(), sharedPreferences.getString("token",null)).
+        iMyService.deleteFile("http://149.28.24.98:9000/lesson/delete-a-multiple-choice/"+LessonID+"/"+items.get(position).getId(), sharedPreferences.getString("token",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){

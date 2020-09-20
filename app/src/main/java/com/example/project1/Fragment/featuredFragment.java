@@ -150,7 +150,7 @@ boolean flag_category=false;
                                 String tempName=jo.getString("name");
                                 String tempID=jo.getString("_id");
                                 String img=jo.getString("image");
-                              items.add(new category_item(tempName,tempID,"http://13.68.245.234:9000/upload/category/"+img));
+                              items.add(new category_item(tempName,tempID,"http://149.28.24.98:9000/upload/category/"+img));
                               adapter.notifyDataSetChanged();
 
                                 flag_category=true;
@@ -238,7 +238,7 @@ boolean flag_category=false;
                             {
                                 JSONObject jo=ja.getJSONObject(i);
 
-                                courseItems3.add(new courseItem( "http://13.68.245.234:9000/upload/course_image/"+jo.getString("image"),
+                                courseItems3.add(new courseItem( "http://149.28.24.98:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),
@@ -335,7 +335,7 @@ boolean flag_category=false;
                             for(int i=0;i<ja.length();i++)
                             {
                                 JSONObject jo=ja.getJSONObject(i);
-                                courseItems2.add(new courseItem( "http://13.68.245.234:9000/upload/course_image/"+jo.getString("image"),
+                                courseItems2.add(new courseItem( "http://149.28.24.98:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),
@@ -433,7 +433,7 @@ boolean flag_category=false;
                             for(int i=0;i<ja.length();i++)
                             {
                                 JSONObject jo=ja.getJSONObject(i);
-                                courseItems.add(new courseItem( "http://13.68.245.234:9000/upload/course_image/"+jo.getString("image"),
+                                courseItems.add(new courseItem( "http://149.28.24.98:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),

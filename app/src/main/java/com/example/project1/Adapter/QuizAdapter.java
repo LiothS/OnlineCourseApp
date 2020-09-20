@@ -82,7 +82,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.CustomViewHold
 
                 if(items.get(getAdapterPosition()).getImage().contains("."))
                 {
-                    Picasso.get().load("http://13.68.245.234:9000/upload/lesson/"+items.get(getAdapterPosition()).getImage()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(imgView);
+                    Picasso.get().load("http://149.28.24.98:9000/upload/lesson/"+items.get(getAdapterPosition()).getImage()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(imgView);
                     imgView.setVisibility(View.VISIBLE);
                 }
                 ansA.setOnClickListener(new View.OnClickListener() {

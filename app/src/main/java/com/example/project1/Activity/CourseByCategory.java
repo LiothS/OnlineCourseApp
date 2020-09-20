@@ -65,7 +65,7 @@ public class CourseByCategory extends AppCompatActivity {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
-        iMyService.getCourseByCategory("http://13.68.245.234:9000/course/getby-category/"+categoryItem.getID()).
+        iMyService.getCourseByCategory("http://149.28.24.98:9000/course/getby-category/"+categoryItem.getID()).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -91,7 +91,7 @@ public class CourseByCategory extends AppCompatActivity {
                             for(int i=0;i<ja.length();i++)
                             {
                                 JSONObject jo=ja.getJSONObject(i);
-                                courseItems.add(new courseItem( "http://13.68.245.234:9000/upload/course_image/"+jo.getString("image"),
+                                courseItems.add(new courseItem( "http://149.28.24.98:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),

@@ -69,7 +69,7 @@ public class UsserAvatarActivity extends AppCompatActivity {
         Retrofit retrofitClient= RetrofitClient.getInstance();
         iMyService=retrofitClient.create(IMyService.class);
         userAccount= (UserAccount) getIntent().getSerializableExtra("userAcc");
-        String avurl="http://13.68.245.234:9000/upload/user_image/";
+        String avurl="http://149.28.24.98:9000/upload/user_image/";
         Picasso.get().load(avurl+userAccount.getAva()).placeholder(R.drawable.useravatar).error(R.drawable.useravatar).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(circleImageView);
         ChonAnhThuVien.setOnClickListener(new View.OnClickListener() {
             @Override

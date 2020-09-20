@@ -183,7 +183,7 @@ public class CreatedCourse extends AppCompatActivity {
     boolean flag5=false;
     String hocvientemp="";
     private void GetHocVien() {
-        iMyService.getListComment("http://13.68.245.234:9000/join/get-total-student-join-course/"+courseItem.getID()).
+        iMyService.getListComment("http://149.28.24.98:9000/join/get-total-student-join-course/"+courseItem.getID()).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -248,7 +248,7 @@ public class CreatedCourse extends AppCompatActivity {
     }
     boolean flag6=false;
     private void GetDoanhThu() {
-        iMyService.getListComment("http://13.68.245.234:9000/order/get-total-revenue-by-id-course/"+courseItem.getID()).
+        iMyService.getListComment("http://149.28.24.98:9000/order/get-total-revenue-by-id-course/"+courseItem.getID()).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -264,7 +264,7 @@ public class CreatedCourse extends AppCompatActivity {
 
 
                         String temp=response;
-                        Toast.makeText(CreatedCourse.this, response, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(CreatedCourse.this, response, Toast.LENGTH_SHORT).show();
 
 
                         //JSONObject jsonObject=new JSONObject(temp);
@@ -319,7 +319,7 @@ public class CreatedCourse extends AppCompatActivity {
 
     private void deleteCourse() {
         alertDialog.show();
-        iMyService.deleteCourse("http://13.68.245.234:9000/course/delete/"+courseItem.getID(),sharedPreferences.getString("token","")).
+        iMyService.deleteCourse("http://149.28.24.98:9000/course/delete/"+courseItem.getID(),sharedPreferences.getString("token","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -393,7 +393,7 @@ public class CreatedCourse extends AppCompatActivity {
     private void updateWithoutImage() {
 
         alertDialog.show();
-        iMyService.courseUpdate1("http://13.68.245.234:9000/update/"+courseItem.getID(),name,goal,description,sendID,price,discount,sharedPreferences.getString("token","")).
+        iMyService.courseUpdate1("http://149.28.24.98:9000/update/"+courseItem.getID(),name,goal,description,sendID,price,discount,sharedPreferences.getString("token","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -497,7 +497,7 @@ public class CreatedCourse extends AppCompatActivity {
         // RequestBody description = RequestBody.create(MediaType.parse("text/plain"), "image-type");
 
         alertDialog.show();
-        iMyService.courseUpdate("http://13.68.245.234:9000/course/update/"+courseItem.getID(),part,name,goal,description,sendID,price,discount,sharedPreferences.getString("token","")).
+        iMyService.courseUpdate("http://149.28.24.98:9000/course/update/"+courseItem.getID(),part,name,goal,description,sendID,price,discount,sharedPreferences.getString("token","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -516,7 +516,7 @@ public class CreatedCourse extends AppCompatActivity {
 
 
                         String temp=response;
-                        Toast.makeText(CreatedCourse.this, response, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(CreatedCourse.this, response, Toast.LENGTH_SHORT).show();
 
                         //JSONObject jsonObject=new JSONObject(temp);
 

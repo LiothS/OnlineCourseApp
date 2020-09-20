@@ -195,7 +195,7 @@ public class CourseDetail extends AppCompatActivity {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
-        iMyService.getListComment("http://13.68.245.234:9000/course/check-is-bough-this-course/"+courseItem.getID()+"/"+sharedPreferences.getString("id",null)).
+        iMyService.getListComment("http://149.28.24.98:9000/course/check-is-bough-this-course/"+courseItem.getID()+"/"+sharedPreferences.getString("id",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -265,7 +265,7 @@ public class CourseDetail extends AppCompatActivity {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
-        iMyService.getListComment("http://13.68.245.234:9000/course/recommend-course/"+courseItem.getID()).
+        iMyService.getListComment("http://149.28.24.98:9000/course/recommend-course/"+courseItem.getID()).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -292,7 +292,7 @@ public class CourseDetail extends AppCompatActivity {
                             {
                                 JSONObject jo=ja.getJSONObject(i);
 
-                                courseItems.add(new courseItem( "http://13.68.245.234:9000/upload/course_image/"+jo.getString("image"),
+                                courseItems.add(new courseItem( "http://149.28.24.98:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getJSONObject("idUser").getString("name"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),
@@ -445,7 +445,7 @@ public class CourseDetail extends AppCompatActivity {
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
 
 
-        iMyService.getListComment("http://13.68.245.234:9000/rate/get-rate-by-course/"+courseItem.getID()).
+        iMyService.getListComment("http://149.28.24.98:9000/rate/get-rate-by-course/"+courseItem.getID()).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -470,7 +470,7 @@ public class CourseDetail extends AppCompatActivity {
                                 String url=jo2.getString("image");
                                 String content=jo1.getString("content");
                                 double rating=jo1.getDouble("numStar");
-                                RatingComment ratingComment=new RatingComment(name,content,(float)rating,"http://13.68.245.234:9000/upload/user_image/"+url);
+                                RatingComment ratingComment=new RatingComment(name,content,(float)rating,"http://149.28.24.98:9000/upload/user_image/"+url);
                                 item.add(ratingComment);
                                 result=result+(float)rating;
                                 ratingCommentAdapter.notifyDataSetChanged();

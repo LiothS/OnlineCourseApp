@@ -139,7 +139,7 @@ public class LessonDetailActivity extends AppCompatActivity {
         // Toast.makeText(this,multiChoiceArrayList.get(index).getImage() , Toast.LENGTH_SHORT).show();
         if(multiChoiceArrayList.get(index).getImage().isEmpty()==false)
         {
-            Picasso.get().load("http://13.68.245.234:9000/upload/lesson/"+multiChoiceArrayList.get(index).getImage()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(imgView);
+            Picasso.get().load("http://149.28.24.98:9000/upload/lesson/"+multiChoiceArrayList.get(index).getImage()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(imgView);
             imgView.setVisibility(View.VISIBLE);
         }
         ansA.setOnClickListener(new View.OnClickListener() {
@@ -247,7 +247,7 @@ public class LessonDetailActivity extends AppCompatActivity {
         simpleExoPlayer= ExoPlayerFactory.newSimpleInstance(this);
         playerView.setPlayer(simpleExoPlayer);
         DataSource.Factory datasource=new DefaultDataSourceFactory(this, Util.getUserAgent(this,"lesson_video"));
-        MediaSource videoSource=new ExtractorMediaSource.Factory(datasource).createMediaSource(Uri.parse("http://13.68.245.234:9000/upload/lesson/"+lesson.getVideo()));
+        MediaSource videoSource=new ExtractorMediaSource.Factory(datasource).createMediaSource(Uri.parse("http://149.28.24.98:9000/upload/lesson/"+lesson.getVideo()));
 
         simpleExoPlayer.prepare(videoSource);
         simpleExoPlayer.setPlayWhenReady(true);
@@ -279,7 +279,7 @@ public class LessonDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         RequestBody body = RequestBody.create(MediaType.parse("application/json"), jo.toString());
-        iMyService.updateProgress("http://13.68.245.234:9000/join/update-progress-lesson-of-course/"+sharedPreferences.getString("id",null)+"/"+
+        iMyService.updateProgress("http://149.28.24.98:9000/join/update-progress-lesson-of-course/"+sharedPreferences.getString("id",null)+"/"+
                 lesson.getIdcourse()+"/"+lesson.getID(),body).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

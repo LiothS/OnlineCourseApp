@@ -66,7 +66,7 @@ public class SearchResultActivity extends AppCompatActivity {
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.setTitle("Đang tìm kiếm...");
         alertDialog.show();
-        iMyService.getCourseByCategory("http://13.68.245.234:9000/course/search-course/" +searchString).
+        iMyService.getCourseByCategory("http://149.28.24.98:9000/course/search-course/" +searchString).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -92,7 +92,7 @@ public class SearchResultActivity extends AppCompatActivity {
                             for(int i=0;i<ja.length();i++)
                             {
                                 JSONObject jo=ja.getJSONObject(i);
-                                courseItems.add(new courseItem( "http://13.68.245.234:9000/upload/course_image/"+jo.getString("image"),
+                                courseItems.add(new courseItem( "http://149.28.24.98:9000/upload/course_image/"+jo.getString("image"),
                                         jo.getString("name"),"0",jo.getString("idUser"),
                                         Float.valueOf(jo.getJSONObject("vote").getString("EVGVote")),
                                         Float.valueOf(jo.getString("price")),

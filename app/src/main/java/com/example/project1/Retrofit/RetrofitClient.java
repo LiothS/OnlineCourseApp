@@ -17,7 +17,7 @@ public class RetrofitClient {
                     .writeTimeout(300, TimeUnit.SECONDS)
                     .readTimeout(300, TimeUnit.SECONDS)
                     .build();
-            instance=new Retrofit.Builder().baseUrl("http://13.68.245.234:9000/")
+            instance=new Retrofit.Builder().baseUrl("http://149.28.24.98:9000/")
                     .addConverterFactory(ScalarsConverterFactory.create()).client(client)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();

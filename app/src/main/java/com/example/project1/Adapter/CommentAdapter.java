@@ -45,7 +45,7 @@ private Lesson lesson;
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.CustomViewHolder holder, int position) {
         if(!items.get(position).getCmtImg().isEmpty())
-            Picasso.get().load("http://13.68.245.234:9000/upload/comment_image/"+items.get(position).getCmtImg()).placeholder(R.drawable.empty).error(R.drawable.empty).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.cmtImg);
+            Picasso.get().load("http://149.28.24.98:9000/upload/comment_image/"+items.get(position).getCmtImg()).placeholder(R.drawable.empty).error(R.drawable.empty).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.cmtImg);
         Picasso.get().load(items.get(position).getAvatar()).placeholder(R.drawable.empty23).error(R.drawable.empty23).networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(holder.userAvatar);
 
         if(items.get(position).getCmtImg().isEmpty()) holder.cmtImg.setVisibility(GONE);

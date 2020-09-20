@@ -93,7 +93,7 @@ public class DoingTestActivity extends AppCompatActivity {
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
 
-        iMyService.getListComment("http://13.68.245.234:9000/lesson/get-multiple-choice-for-test/"+lesson.getID()).
+        iMyService.getListComment("http://149.28.24.98:9000/lesson/get-multiple-choice-for-test/"+lesson.getID()).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){

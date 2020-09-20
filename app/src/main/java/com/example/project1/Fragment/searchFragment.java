@@ -193,7 +193,7 @@ ChipGroup chipGroup;
                                 String tempName=jo.getString("name");
                                 String tempID=jo.getString("_id");
                                 String img=jo.getString("image");
-                                items.add(new category_item(tempName,tempID,"http://13.68.245.234:9000/upload/category/"+img));
+                                items.add(new category_item(tempName,tempID,"http://149.28.24.98:9000/upload/category/"+img));
                                 adapter.notifyDataSetChanged();
 
                                 flag_category=true;

@@ -100,7 +100,7 @@ public class JoinedCourseLessons extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
-        iMyService.getLesson("http://13.68.245.234:9000/lesson/get-lesson-by-id-course/"+courseItem.getID(),sharedPreferences.getString("token",null)).
+        iMyService.getLesson("http://149.28.24.98:9000/lesson/get-lesson-by-id-course/"+courseItem.getID(),sharedPreferences.getString("token",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -314,7 +314,7 @@ public class JoinedCourseLessons extends AppCompatActivity {
         SharedPreferences sharedPreferences;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(JoinedCourseLessons.this);
 
-        iMyService.getListComment("http://13.68.245.234:9000/join/get-progress-course-join-by-idUser-and-idCourse/"+sharedPreferences.getString("id",null)+"/"+courseItem.getID()).
+        iMyService.getListComment("http://149.28.24.98:9000/join/get-progress-course-join-by-idUser-and-idCourse/"+sharedPreferences.getString("id",null)+"/"+courseItem.getID()).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){

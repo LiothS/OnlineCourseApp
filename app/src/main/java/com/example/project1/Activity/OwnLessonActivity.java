@@ -155,7 +155,7 @@ public class OwnLessonActivity extends AppCompatActivity {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(this).build();
         alertDialog.show();
-        iMyService.updateLessonInfo("http://13.68.245.234:9000/lesson/update-lesson/"+lesson.getID(),lesson.getIdcourse(),lessonOrder.getText().toString(), lessonTitle.getText().toString(),
+        iMyService.updateLessonInfo("http://149.28.24.98:9000/lesson/update-lesson/"+lesson.getID(),lesson.getIdcourse(),lessonOrder.getText().toString(), lessonTitle.getText().toString(),
                 sharedPreferences.getString("token",null)).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

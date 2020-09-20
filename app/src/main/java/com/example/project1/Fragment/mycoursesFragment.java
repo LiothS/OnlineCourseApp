@@ -91,7 +91,7 @@ public class mycoursesFragment extends Fragment {
         iMyService=retrofitClient.create(IMyService.class);
         alertDialog= new SpotsDialog.Builder().setContext(getContext()).build();
         alertDialog.show();
-        iMyService.getJoinedCourse("http://13.68.245.234:9000/join/get-courses-joined-by-user/"+sharedPreferences.getString("id","")).
+        iMyService.getJoinedCourse("http://149.28.24.98:9000/join/get-courses-joined-by-user/"+sharedPreferences.getString("id","")).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>(){
@@ -157,7 +157,7 @@ public class mycoursesFragment extends Fragment {
                                     courseItem ci=new courseItem();
                                     ci.setID(jo2.getString("_id"));
                                     ci.setTitle(jo2.getString("name"));
-                                    ci.setUrl("http://13.68.245.234:9000/upload/course_image/"+jo2.getString("image"));
+                                    ci.setUrl("http://149.28.24.98:9000/upload/course_image/"+jo2.getString("image"));
                                     ci.setPercent(jo.getInt("percentCompleted"));
 
                                     ci.setCreateAt(jo.getString("created_at"));
