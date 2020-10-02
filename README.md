@@ -1,3 +1,0 @@
-# OnlineCourseApp
--Chức năng:
-  asdasdasdasdasd
